@@ -4,7 +4,7 @@ This document outlines the data model design for the farm management extension t
 
 ## Core Principles
 
-1. **"Invisible Software" Approach**
+1. **AI-as-a-Service (AIaaS) Approach**
    - AI should reduce rather than increase structure and formality
    - Capture data naturally when possible, only impose structure when necessary
    - Minimize required fields and manual data entry
