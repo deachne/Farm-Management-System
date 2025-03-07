@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLLM Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="farm-app-styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-green-800 text-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">FarmLLM</h1>
+                    <span class="text-sm bg-green-700 px-2 py-1 rounded">Spring 2025</span>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="hover:text-green-300">Fields</a>
+                    <a href="#" class="hover:text-green-300">Inputs</a>
+                    <a href="#" class="hover:text-green-300">Operations</a>
+                    <a href="#" class="hover:text-green-300">Analytics</a>
+                </nav>
+                <button class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div class="hidden bg-green-700 text-white md:hidden">
+            <div class="container mx-auto px-4 py-2">
+                <div class="flex flex-col space-y-2">
+                    <a href="#" class="py-2 hover:bg-green-600 px-2 rounded">Fields</a>
+                    <a href="#" class="py-2 hover:bg-green-600 px-2 rounded">Inputs</a>
+                    <a href="#" class="py-2 hover:bg-green-600 px-2 rounded">Operations</a>
+                    <a href="#" class="py-2 hover:bg-green-600 px-2 rounded">Analytics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Sidebar with Workspaces -->
+                <aside class="w-full md:w-64 bg-white rounded-lg shadow-md p-4">
+                    <h2 class="text-lg font-semibold mb-4">Workspaces</h2>
+                    <ul class="space-y-2">
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">All Fields</a>
+                        </li>
+                        <li class="bg-green-100 hover:bg-green-200 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800 font-semibold">North 40</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">South Quarter</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">West 80</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">East 120</a>
+                        </li>
+                        <li class="mt-4 border-t pt-4">
+                            <a href="#" class="block py-2 px-3 text-green-800 hover:bg-gray-100 rounded">Input Quotes</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 px-3 text-green-800 hover:bg-gray-100 rounded">Soil Tests</a>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!-- Main Content Area -->
+                <div class="flex-grow">
+                    <!-- Quick Query Bar -->
+                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Ask anything about your farm data..." 
+                                class="w-full py-3 px-4 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                value="What's the best price for urea?">
+                            <button class="absolute right-3 top-3 text-green-600 hover:text-green-800">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded-full">
+                                When was field X harvested?
+                            </button>
+                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded-full">
+                                Soil test results for North 40
+                            </button>
+                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded-full">
+                                Compare fertilizer prices
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Field View with Map -->
+                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-800">North 40 Field</h2>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded">
+                                    Add Observation
+                                </button>
+                                <button class="bg-green-600 hover:bg-green-700 text-white text-sm py-1 px-3 rounded">
+                                    Field Report
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Map Component -->
+                        <div class="h-72 bg-gray-300 mb-4 rounded relative" id="field-map">
+                            <!-- Map will be initialized here with JavaScript -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-gray-500">Interactive field map will load here</span>
+                            </div>
+                        </div>
+
+                        <!-- Field Details -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-gray-100 p-3 rounded">
+                                <h3 class="font-semibold text-gray-700 mb-1">Crop Plan 2025</h3>
+                                <p>Spring Wheat (Northern Hard Red)</p>
+                                <p class="text-sm text-gray-600">Projected yield: 65 bu/acre</p>
+                            </div>
+                            <div class="bg-gray-100 p-3 rounded">
+                                <h3 class="font-semibold text-gray-700 mb-1">Soil Test Summary</h3>
+                                <p>Nitrogen: Low (32 lbs/acre)</p>
+                                <p>Phosphorus: Medium (45 ppm)</p>
+                            </div>
+                            <div class="bg-gray-100 p-3 rounded">
+                                <h3 class="font-semibold text-gray-700 mb-1">Recent Observations</h3>
+                                <p class="text-sm">May 2: Field preparation started</p>
+                                <p class="text-sm">Apr 28: Standing water in NE corner</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Response Area (Fertilizer Quote Comparison) -->
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-green-700 text-white p-2 rounded-full mr-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">Best Prices for Urea (46-0-0)</h3>
+                                
+                                <!-- Price Comparison Table -->
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white border border-gray-300 mb-3">
+                                        <thead>
+                                            <tr>
+                                                <th class="py-2 px-4 border-b border-gray-300 text-left">Retailer</th>
+                                                <th class="py-2 px-4 border-b border-gray-300 text-right">Price/Ton</th>
+                                                <th class="py-2 px-4 border-b border-gray-300 text-right">Price/Unit N</th>
+                                                <th class="py-2 px-4 border-b border-gray-300 text-center">Quote Date</th>
+                                                <th class="py-2 px-4 border-b border-gray-300 text-center">Available</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-green-50">
+                                                <td class="py-2 px-4 border-b border-gray-300 font-medium">AgriChem Supply</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$520.00</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$1.13</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">May 1, 2025</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-4 border-b border-gray-300">FarmCo Inputs</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$545.00</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$1.18</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">May 3, 2025</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-4 border-b border-gray-300">Prairie AG Cooperative</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$560.00</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$1.22</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">Apr 28, 2025</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-4 border-b border-gray-300">Rural Supplies Inc.</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$572.00</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-right">$1.24</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">May 2, 2025</td>
+                                                <td class="py-2 px-4 border-b border-gray-300 text-center">Limited</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <p class="text-gray-700 mb-3">
+                                    Based on the latest quotes, <strong>AgriChem Supply</strong> offers the best price for urea at <strong>$520.00 per ton</strong>, which is $25.00 lower than the next best offer from FarmCo Inputs. This translates to $1.13 per unit of nitrogen.
+                                </p>
+                                
+                                <p class="text-gray-700 mb-3">
+                                    For your North 40 field's 32 lbs/acre nitrogen deficiency and target of 65 bu/acre wheat, you would need approximately 75 lbs/acre of additional nitrogen, or 3,000 lbs total for the field. At AgriChem's price, this would cost approximately $1,690.
+                                </p>
+                                
+                                <div class="text-sm text-gray-500">
+                                    <p>Sources: Email quotes from AgriChem Supply (May 1), FarmCo Inputs (May 3), Prairie AG Cooperative (Apr 28), and Rural Supplies Inc. (May 2)</p>
+                                </div>
+                                
+                                <div class="flex justify-end mt-3">
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded mr-2">
+                                        Export to PDF
+                                    </button>
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded">
+                                        Create Purchase Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 mt-6">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-600 text-sm mb-4 md:mb-0">
+                        © 2025 FarmLLM - Powered by AnythingLLM
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Help</a>
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Settings</a>
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Privacy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="farm-app-scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnythingLLM Notes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-theme-bg-container">
+    <div class="w-screen h-screen overflow-hidden bg-theme-bg-container flex">
+        <!-- Sidebar Component (simplified version of actual component) -->
+        <div class="transition-all duration-500" style="width: 292px;">
+            <div class="flex shrink-0 w-full justify-center my-[18px]">
+                <div class="flex justify-between w-[250px] min-w-[250px]">
+                    <a href="#" aria-label="Home">
+                        <img src="/logo.png" alt="Logo" class="rounded max-h-[24px] object-contain" />
+                    </a>
+                </div>
+            </div>
+            <div class="relative m-[16px] rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border light:border-none min-w-[250px] p-[10px] h-[calc(100%-76px)]">
+                <div class="flex flex-col h-full overflow-x-hidden">
+                    <div class="flex-grow flex flex-col min-w-[235px]">
+                        <div class="relative h-[calc(100%-60px)] flex flex-col w-full justify-between pt-[10px] overflow-y-scroll no-scroll">
+                            <div class="flex flex-col gap-y-2 pb-[60px] overflow-y-scroll no-scroll">
+                                <!-- Workspace Button -->
+                                <div class="flex gap-x-2 items-center justify-between">
+                                    <button class="light:bg-[#C2E7FE] light:hover:bg-[#7CD4FD] flex flex-grow w-[75%] h-[44px] gap-x-2 py-[5px] px-2.5 mb-2 bg-white rounded-[8px] text-sidebar justify-center items-center hover:bg-opacity-80 transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+                                        <p class="text-sidebar text-sm font-semibold">New Workspace</p>
+                                    </button>
+                                </div>
+                                
+                                <!-- Workspaces List -->
+                                <div class="flex flex-col gap-y-[2px]">
+                                    <p class="text-xs font-medium text-theme-text-secondary uppercase pl-2.5 pb-1">Workspaces</p>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] items-center hover:bg-theme-hover transition-all duration-300">
+                                        <span class="text-sm text-theme-text-primary">Research Notes</span>
+                                    </a>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] items-center hover:bg-theme-hover transition-all duration-300">
+                                        <span class="text-sm text-theme-text-primary">Farm Management</span>
+                                    </a>
+                                </div>
+                                
+                                <!-- Notes Section - New Addition -->
+                                <div class="flex flex-col gap-y-[2px] mt-4">
+                                    <p class="text-xs font-medium text-theme-text-secondary uppercase pl-2.5 pb-1">Notes</p>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] bg-theme-hover items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.32,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.69,147.32,64l24-24L216,84.69Z"></path></svg>
+                                        <span class="text-sm text-theme-text-primary">All Notes</span>
+                                    </a>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] items-center hover:bg-theme-hover transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg>
+                                        <span class="text-sm text-theme-text-primary">Daily Notes</span>
+                                    </a>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] items-center hover:bg-theme-hover transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M196,48H168V40a20,20,0,0,0-20-20H108A20,20,0,0,0,88,40v8H60A12,12,0,0,0,48,60v36a12,12,0,0,0,12,12H196a12,12,0,0,0,12-12V60A12,12,0,0,0,196,48ZM104,40a4,4,0,0,1,4-4h40a4,4,0,0,1,4,4v8H104Zm92,56H60V60H196ZM60,128a12,12,0,0,0,12-12V112a4,4,0,0,1,8,0v4a12,12,0,0,0,24,0v-4a4,4,0,0,1,8,0v4a12,12,0,0,0,24,0v-4a4,4,0,0,1,8,0v4a12,12,0,0,0,24,0v-4a4,4,0,0,1,8,0v4a12,12,0,0,0,12,12v68a20,20,0,0,1-20,20H80a20,20,0,0,1-20-20Z"></path></svg>
+                                        <span class="text-sm text-theme-text-primary">Field Notes</span>
+                                    </a>
+                                    <a href="#" class="flex rounded-[8px] px-2.5 py-[6px] gap-x-[6px] items-center hover:bg-theme-hover transition-all duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M232,84a12,12,0,0,0-12,12v12a76,76,0,0,1-76,76H92.69l38.66-38.66a12,12,0,0,0-17-17l-60,60a12,12,0,0,0,0,17l60,60a12,12,0,0,0,17-17L92.69,208H144a100,100,0,0,0,100-100V96A12,12,0,0,0,232,84Z"></path></svg>
+                                        <span class="text-sm text-theme-text-primary">Recent Notes</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 pt-4 pb-3 rounded-b-[16px] bg-theme-bg-sidebar bg-opacity-80 backdrop-filter backdrop-blur-md z-1">
+                            <div class="flex justify-center items-center text-xs text-theme-text-secondary">
+                                <span>© 2025 AnythingLLM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Note Editor Area -->
+        <div class="flex-1 flex flex-col h-full">
+            <!-- Header Bar -->
+            <div class="bg-theme-bg-secondary border-b border-theme-border p-3 flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-semibold text-theme-text-primary">Notes</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="light:bg-[#C2E7FE] light:hover:bg-[#7CD4FD] px-3 py-1.5 rounded-md text-sm font-medium bg-theme-button-secondary text-theme-text-primary hover:bg-opacity-80 transition-all">
+                        New Note
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Notes Interface (Two-column layout) -->
+            <div class="flex-1 flex overflow-hidden">
+                <!-- Notes List Column -->
+                <div class="w-64 border-r border-theme-border bg-theme-bg-secondary overflow-y-auto">
+                    <div class="p-2">
+                        <div class="relative mb-2">
+                            <input
+                                type="text"
+                                placeholder="Search notes..."
+                                class="w-full py-1.5 px-3 pr-8 text-sm rounded-md border border-theme-border bg-theme-bg-secondary text-theme-text-primary focus:outline-none focus:ring-1 focus:ring-theme-primary"
+                            />
+                            <div class="absolute right-2 top-1/2 transform -translate-y-1/2 text-theme-text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes List -->
+                        <div class="space-y-1">
+                            <div class="bg-theme-primary bg-opacity-20 rounded-md p-2 cursor-pointer">
+                                <div class="font-medium text-sm text-theme-text-primary">Field Observation - May 6</div>
+                                <div class="text-xs text-theme-text-secondary mt-1">Updated just now</div>
+                                <div class="text-xs text-theme-text-secondary truncate mt-1">Checked the North 40 field this morning. Standing water is...</div>
+                            </div>
+                            
+                            <div class="hover:bg-theme-hover rounded-md p-2 cursor-pointer">
+                                <div class="font-medium text-sm text-theme-text-primary">Fertilizer Plan Notes</div>
+                                <div class="text-xs text-theme-text-secondary mt-1">Updated 2 hours ago</div>
+                                <div class="text-xs text-theme-text-secondary truncate mt-1">Need to compare prices from AgriChem and FarmCo...</div>
+                            </div>
+                            
+                            <div class="hover:bg-theme-hover rounded-md p-2 cursor-pointer">
+                                <div class="font-medium text-sm text-theme-text-primary">Equipment Maintenance</div>
+                                <div class="text-xs text-theme-text-secondary mt-1">Updated May 4</div>
+                                <div class="text-xs text-theme-text-secondary truncate mt-1">Seeder needs new parts before planting season...</div>
+                            </div>
+                            
+                            <div class="hover:bg-theme-hover rounded-md p-2 cursor-pointer">
+                                <div class="font-medium text-sm text-theme-text-primary">Crop Rotation Planning</div>
+                                <div class="text-xs text-theme-text-secondary mt-1">Updated May 1</div>
+                                <div class="text-xs text-theme-text-secondary truncate mt-1">Considering switching East 120 to soybeans next year...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Note Editor Column -->
+                <div class="flex-1 flex flex-col overflow-hidden">
+                    <!-- Note Editor Toolbar -->
+                    <div class="bg-theme-bg-secondary border-b border-theme-border p-2 flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input
+                                type="text"
+                                value="Field Observation - May 6"
+                                class="bg-transparent border-none text-lg font-medium text-theme-text-primary focus:outline-none focus:ring-0"
+                                placeholder="Note title"
+                            />
+                        </div>
+                        
+                        <div class="flex items-center gap-2 text-theme-text-secondary text-xs">
+                            <span>Auto-saved just now</span>
+                            
+                            <button class="p-1 rounded hover:bg-theme-hover transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M144,128a16,16,0,1,1-16-16A16,16,0,0,1,144,128Zm-16-56a16,16,0,1,0-16-16A16,16,0,0,0,128,72Zm0,112a16,16,0,1,0,16,16A16,16,0,0,0,128,184Z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple Format Toolbar -->
+                    <div class="bg-theme-bg-secondary border-b border-theme-border p-1.5 flex gap-1">
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M212,40H44A12,12,0,0,0,32,52V204a12,12,0,0,0,12,12H212a12,12,0,0,0,12-12V52A12,12,0,0,0,212,40ZM44,52H212v36H44ZM44,204V104H212V204Z"></path></svg>
+                        </button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary font-bold">B</button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary italic">I</button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H168a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>
+                        </button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M88,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H96A8,8,0,0,1,88,64Zm128,56H96a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H96a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM56,56H40a8,8,0,0,0,0,16H56a8,8,0,0,0,0-16Zm0,64H40a8,8,0,0,0,0,16H56a8,8,0,0,0,0-16Zm0,64H40a8,8,0,0,0,0,16H56a8,8,0,0,0,0-16Z"></path></svg>
+                        </button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM96,208H48V160H96Zm0-64H48V96H96Zm0-64H48V48H96Zm64,128H112V160h48Zm0-64H112V96h48Zm0-64H112V48h48Zm48,128H176V160h32Zm0-64H176V96h32Zm0-64H176V48h32Z"></path></svg>
+                        </button>
+                        <div class="h-6 w-px bg-theme-border mx-1"></div>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M152,112a8,8,0,0,1-8,8H112a8,8,0,0,1,0-16h32A8,8,0,0,1,152,112Zm-8,24H112a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm56-88H56a16,16,0,0,0-16,16V208a8,8,0,0,0,16,0V64h8V192a16,16,0,0,0,16,16h96a16,16,0,0,0,16-16V64a16,16,0,0,0-16-16ZM176,192H80V64h96Z"></path></svg>
+                        </button>
+                        <button class="p-1 rounded hover:bg-theme-hover text-theme-text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-64-64a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Note Content Area -->
+                    <div class="flex-1 overflow-y-auto p-4 bg-theme-bg-container">
+                        <textarea
+                            class="w-full h-full resize-none bg-transparent text-theme-text-primary focus:outline-none focus:ring-0 border-none leading-relaxed"
+                            placeholder="Start writing..."
+                        >Checked the North 40 field this morning. Standing water is mostly gone from the NE corner, should be ready for equipment in 2-3 days if weather holds.
+
+Called AgriChem Supply about their urea quote. They confirmed price of $520/ton is valid through May 15. Need to decide on order quantity by Friday.
+
+Soil test results for South Quarter came back. Will need to adjust phosphorus application rate - higher than expected.
+
+Tasks for tomorrow:
+- Finish equipment maintenance on the seeder
+- Call Prairie AG about potash availability
+- Schedule meeting with crop consultant for next week</textarea>
+                    </div>
+                    
+                    <!-- Note Footer -->
+                    <div class="bg-theme-bg-secondary border-t border-theme-border p-3 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <button class="bg-theme-button-primary hover:bg-opacity-80 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-all">
+                                Save & Embed
+                            </button>
+                            <button class="bg-theme-button-secondary hover:bg-opacity-80 text-theme-text-primary px-3 py-1.5 rounded-md text-sm font-medium transition-all">
+                                Add to Workspace
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center gap-2">
+                            <select class="text-xs bg-theme-bg-secondary border border-theme-border rounded px-2 py-1 text-theme-text-primary focus:outline-none focus:ring-1 focus:ring-theme-primary">
+                                <option>No Tags</option>
+                                <option>Field Notes</option>
+                                <option>Planning</option>
+                                <option>Add Tag...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

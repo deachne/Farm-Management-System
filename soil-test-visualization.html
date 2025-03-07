@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLLM Soil Test Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+    <link rel="stylesheet" href="farm-app-styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-green-800 text-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">FarmLLM</h1>
+                    <span class="text-sm bg-green-700 px-2 py-1 rounded">Soil Analysis</span>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="hover:text-green-300">Fields</a>
+                    <a href="#" class="hover:text-green-300">Inputs</a>
+                    <a href="#" class="hover:text-green-300">Operations</a>
+                    <a href="#" class="hover:text-green-300">Analytics</a>
+                </nav>
+                <button class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Sidebar with Workspaces -->
+                <aside class="w-full md:w-64 bg-white rounded-lg shadow-md p-4">
+                    <h2 class="text-lg font-semibold mb-4">Soil Tests</h2>
+                    <ul class="space-y-2">
+                        <li class="bg-green-100 hover:bg-green-200 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800 font-semibold">North 40 (Current)</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">South Quarter</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">West 80</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">East 120</a>
+                        </li>
+                        <li class="mt-4 border-t pt-4">
+                            <span class="block px-3 py-1 text-sm text-gray-600">Test History</span>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">
+                                <span>Spring 2025</span>
+                                <span class="bg-green-200 text-green-800 text-xs px-1 rounded ml-2">Current</span>
+                            </a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">Fall 2024</a>
+                        </li>
+                        <li class="hover:bg-gray-100 rounded">
+                            <a href="#" class="block py-2 px-3 text-green-800">Spring 2024</a>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!-- Main Content Area -->
+                <div class="flex-grow">
+                    <!-- Field Info Header -->
+                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <div class="flex flex-col md:flex-row justify-between md:items-center">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-800">North 40 Field - Soil Analysis</h2>
+                                <p class="text-gray-600">
+                                    Test Date: May 1, 2025 
+                                    <span class="ml-3 text-sm bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
+                                        Spring 2025 Sample
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="mt-2 md:mt-0 flex flex-wrap gap-2">
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                    </svg>
+                                    Export PDF
+                                </button>
+                                <button class="bg-green-600 hover:bg-green-700 text-white text-sm py-1 px-3 rounded flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    Apply Recommendations
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soil Test Results -->
+                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Soil Test Results</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Primary Nutrients -->
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 mb-3">Primary Nutrients</h4>
+                                
+                                <!-- Nitrogen -->
+                                <div class="mb-4">
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Nitrogen (N)</span>
+                                        <span class="font-medium">32 lbs/acre</span>
+                                    </div>
+                                    <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                        <div class="soil-bar soil-bar-n h-2.5 rounded-full" style="width: 30%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-1">
+                                        <span>Low</span>
+                                        <span>Optimal</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Phosphorus -->
+                                <div class="mb-4">
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Phosphorus (P)</span>
+                                        <span class="font-medium">45 ppm</span>
+                                    </div>
+                                    <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                        <div class="soil-bar soil-bar-p h-2.5 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-1">
+                                        <span>Low</span>
+                                        <span>Optimal</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Potassium -->
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Potassium (K)</span>
+                                        <span class="font-medium">180 ppm</span>
+                                    </div>
+                                    <div class="w-full bg-gray-300 rounded-full h-2.5">
+                                        <div class="soil-bar soil-bar-k h-2.5 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-1">
+                                        <span>Low</span>
+                                        <span>Optimal</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Secondary Nutrients -->
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 mb-3">Secondary Nutrients & pH</h4>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <!-- Sulfur -->
+                                    <div>
+                                        <div class="text-sm mb-1">Sulfur (S)</div>
+                                        <div class="flex items-end">
+                                            <span class="text-2xl font-bold">12</span>
+                                            <span class="text-sm ml-1 mb-1">ppm</span>
+                                        </div>
+                                        <div class="text-xs text-green-600">Adequate</div>
+                                    </div>
+                                    
+                                    <!-- Calcium -->
+                                    <div>
+                                        <div class="text-sm mb-1">Calcium (Ca)</div>
+                                        <div class="flex items-end">
+                                            <span class="text-2xl font-bold">1450</span>
+                                            <span class="text-sm ml-1 mb-1">ppm</span>
+                                        </div>
+                                        <div class="text-xs text-green-600">Optimal</div>
+                                    </div>
+                                    
+                                    <!-- Magnesium -->
+                                    <div>
+                                        <div class="text-sm mb-1">Magnesium (Mg)</div>
+                                        <div class="flex items-end">
+                                            <span class="text-2xl font-bold">215</span>
+                                            <span class="text-sm ml-1 mb-1">ppm</span>
+                                        </div>
+                                        <div class="text-xs text-green-600">Optimal</div>
+                                    </div>
+                                    
+                                    <!-- pH -->
+                                    <div>
+                                        <div class="text-sm mb-1">pH</div>
+                                        <div class="flex items-end">
+                                            <span class="text-2xl font-bold">6.5</span>
+                                        </div>
+                                        <div class="text-xs text-green-600">Neutral</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <div class="text-sm mb-1">Organic Matter</div>
+                                    <div class="flex items-end">
+                                        <span class="text-2xl font-bold">3.2</span>
+                                        <span class="text-sm ml-1 mb-1">%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-300 rounded-full h-2.5 mt-1">
+                                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 64%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Micronutrients -->
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-700 mb-3">Micronutrients</h4>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm">Zinc (Zn)</span>
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">3.1 ppm</span>
+                                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm">Manganese (Mn)</span>
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">12.4 ppm</span>
+                                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm">Iron (Fe)</span>
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">85.2 ppm</span>
+                                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm">Copper (Cu)</span>
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">0.8 ppm</span>
+                                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm">Boron (B)</span>
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">0.6 ppm</span>
+                                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-end mt-4">
+                                    <div class="flex items-center text-xs space-x-4">
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-green-500 mr-1"></span>
+                                            <span>Optimal</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-yellow-500 mr-1"></span>
+                                            <span>Marginal</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="w-3 h-3 rounded-full bg-red-500 mr-1"></span>
+                                            <span>Low</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Nutrient History Chart -->
+                        <div class="mt-6">
+                            <h4 class="font-medium text-gray-700 mb-3">Nutrient History</h4>
+                            <div class="bg-white border rounded-lg p-3">
+                                <canvas id="nutrientHistoryChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Analysis and Recommendations -->
+                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-green-700 text-white p-2 rounded-full mr-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">AI Analysis & Fertilizer Recommendations</h3>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-medium text-gray-700 mb-2">Soil Analysis Summary</h4>
+                                    <p class="text-gray-600">
+                                        Your North 40 field soil test shows <strong>low nitrogen levels (32 lbs/acre)</strong>, which will need supplementation for optimal wheat growth. Phosphorus is adequate but at the lower end of the optimal range. Potassium levels are good. pH is neutral at 6.5, which is ideal for wheat production. Organic matter is at 3.2%, which is good.
+                                    </p>
+                                    <p class="text-gray-600 mt-2">
+                                        Micronutrients are mostly in good range, though copper and boron are slightly below optimal levels but shouldn't significantly limit crop growth.
+                                    </p>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-medium text-gray-700 mb-2">Fertilizer Recommendations for Spring Wheat (65 bu/acre target)</h4>
+                                    
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full border border-gray-300 mb-3">
+                                            <thead>
+                                                <tr class="bg-gray-100">
+                                                    <th class="py-2 px-4 border-b border-gray-300 text-left">Nutrient</th>
+                                                    <th class="py-2 px-4 border-b border-gray-300 text-center">Soil Test</th>
+                                                    <th class="py-2 px-4 border-b border-gray-300 text-center">Crop Need</th>
+                                                    <th class="py-2 px-4 border-b border-gray-300 text-center">Required</th>
+                                                    <th class="py-2 px-4 border-b border-gray-300 text-center">Product Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="py-2 px-4 border-b border-gray-300 font-medium">Nitrogen (N)</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">32 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">120 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center bg-green-50 font-medium">88 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300">
+                                                        <div>Urea (46-0-0): 191 lbs/acre</div>
+                                                        <div>UAN (28-0-0): 314 lbs/acre</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2 px-4 border-b border-gray-300 font-medium">Phosphorus (P₂O₅)</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">45 ppm</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">30 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center bg-green-50 font-medium">15 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300">
+                                                        <div>MAP (11-52-0): 29 lbs/acre</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2 px-4 border-b border-gray-300 font-medium">Potassium (K₂O)</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">180 ppm</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">20 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center bg-green-50 font-medium">0 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300">
+                                                        <div>Not needed</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2 px-4 border-b border-gray-300 font-medium">Sulfur (S)</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">12 ppm</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center">15 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300 text-center bg-green-50 font-medium">10 lbs/acre</td>
+                                                    <td class="py-2 px-4 border-b border-gray-300">
+                                                        <div>Ammonium Sulfate (21-0-0-24S): 42 lbs/acre</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-medium text-gray-700 mb-2">Application Strategy</h4>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="bg-gray-100 p-3 rounded">
+                                            <h5 class="font-medium text-gray-800 mb-1">Pre-planting Application</h5>
+                                            <ul class="list-disc text-sm text-gray-700 pl-5">
+                                                <li>Urea (46-0-0): 150 lbs/acre (split application)</li>
+                                                <li>MAP (11-52-0): 29 lbs/acre (full amount)</li>
+                                                <li>Ammonium Sulfate: 42 lbs/acre (full amount)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-gray-100 p-3 rounded">
+                                            <h5 class="font-medium text-gray-800 mb-1">In-season Application</h5>
+                                            <ul class="list-disc text-sm text-gray-700 pl-5">
+                                                <li>Urea (46-0-0): 41 lbs/acre at 5-leaf stage</li>
+                                                <li>Consider foliar application of copper and boron if deficiency symptoms appear</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Cost Analysis -->
+                                <div>
+                                    <h4 class="font-medium text-gray-700 mb-2">Cost Analysis (based on current quotes)</h4>
+                                    
+                                    <div class="bg-gray-100 p-3 rounded">
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>Urea (46-0-0): 191 lbs/acre × $520/ton</span>
+                                            <span class="font-medium">$49.66/acre</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>MAP (11-52-0): 29 lbs/acre × $670/ton</span>
+                                            <span class="font-medium">$9.72/acre</span>
+                                        </div>
+                                        <div class="flex justify-between mb-1 text-sm">
+                                            <span>Ammonium Sulfate: 42 lbs/acre × $425/ton</span>
+                                            <span class="font-medium">$8.93/acre</span>
+                                        </div>
+                                        <div class="flex justify-between mt-2 font-medium">
+                                            <span>Total Fertilizer Cost</span>
+                                            <span>$68.31/acre</span>
+                                        </div>
+                                        <div class="flex justify-between mt-1 text-sm text-gray-600">
+                                            <span>Total for North 40 Field (40 acres)</span>
+                                            <span>$2,732.40</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-sm text-gray-500 mt-2">
+                                        <p>Prices based on latest quotes from AgriChem Supply (May 1, 2025). Actual prices may vary.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-end mt-4">
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm py-1 px-3 rounded mr-2">
+                                        View Application Map
+                                    </button>
+                                    <button class="bg-green-600 hover:bg-green-700 text-white text-sm py-1 px-3 rounded">
+                                        Create Work Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 mt-6">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-600 text-sm mb-4 md:mb-0">
+                        © 2025 FarmLLM - Powered by AnythingLLM
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Help</a>
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Settings</a>
+                        <a href="#" class="text-gray-600 hover:text-green-800 text-sm">Privacy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Nutrient History Chart
+            const ctx = document.getElementById('nutrientHistoryChart').getContext('2d');
+            const labels = ['Fall 2023', 'Spring 2024', 'Fall 2024', 'Spring 2025'];
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Nitrogen (lbs/acre)',
+                            data: [28, 35, 25, 32],
+                            borderColor: '#28a745',
+                            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Phosphorus (ppm)',
+                            data: [38, 42, 40, 45],
+                            borderColor: '#fd7e14',
+                            backgroundColor: 'rgba(253, 126, 20, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Potassium (ppm)',
+                            data: [165, 170, 175, 180],
+                            borderColor: '#6f42c1',
+                            backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Organic Matter (%)',
+                            data: [2.8, 3.0, 3.1, 3.2],
+                            borderColor: '#20c997',
+                            backgroundColor: 'rgba(32, 201, 151, 0.1)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Nutrient Level'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Organic Matter (%)'
+                            },
+                            min: 0,
+                            max: 6,
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

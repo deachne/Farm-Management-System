@@ -1,0 +1,70 @@
+# Farm Management System - Project Guidelines
+
+## AnythingLLM Integration Focus
+- Develop a clear integration plan with AnythingLLM before making code changes
+- Maintain compatibility with AnythingLLM's core functionality and architecture
+- Extend rather than override AnythingLLM components where possible
+- Follow AnythingLLM's existing patterns for vectorization, embedding, and retrieval
+- Document all integration points with the base AnythingLLM system
+- Test changes against the latest AnythingLLM version to ensure compatibility
+
+## Project Structure
+- Maintain a clear folder structure with separate directories for backend, frontend, and documentation
+- Use descriptive file names with a consistent naming convention
+- Keep related functionality grouped together
+- Number documentation files for easy reference (e.g., 01-System-Overview.md)
+- Create dedicated directories for farm-specific extensions
+
+## ## Code Standards
+- Follow separation of concerns principles in all implementations
+- Store sensitive information like API keys in environment variables, not in code
+- Maintain a requirements.txt with specific version numbers for reproducibility
+- Follow standard API patterns for the libraries being used (e.g., OpenAI, FastAPI)
+- For FastAPI apps, follow project-specific conventions for app structure
+- Preserve existing functionality when making changes
+- Follow AnythingLLM's existing patterns for state management and API design
+
+## Agricultural System Specifics
+- Implement specialized data models for farm-specific information
+- Create mobile-friendly interfaces for field use
+- Optimize AI components for agricultural terminology and concepts
+- Balance AI capabilities with appropriate UI components
+- Focus on practical features that deliver immediate value to farmers
+- Prioritize robust data capture methods for field conditions
+- Ensure system works reliably in rural environments with limited connectivity
+
+## Documentation
+- Maintain clear, concise documentation for all components
+- Update project checklist as items are completed
+- Link checklist items to detailed documentation files
+- Include implementation details in specialized documentation files
+- Document API endpoints and data structures
+- Create specific documentation for AnythingLLM integration points
+
+## Development Process
+- Start with an integration analysis to identify AnythingLLM touch points
+- Create an integration plan before implementing any features
+- Implement features in the order specified in the project checklist
+- Test each component thoroughly before moving to the next
+- Ensure mobile compatibility for field-focused features
+- Optimize for performance and offline capabilities where appropriate
+- Maintain backward compatibility with existing AnythingLLM features
+- Regularly test with the base AnythingLLM system during development
+
+## Data Capture & Retrieval Excellence
+- Optimize vectorization specifically for agricultural terminology and field observations
+- Implement robust tagging systems that understand farm-specific entities (fields, crops, equipment)
+- Enhance semantic search to recognize relationships between farming concepts
+- Create specialized embedding approaches for different types of farm data (soil tests, field observations, equipment notes)
+- Implement thorough validation for all captured data to ensure quality
+- Design multi-modal capture methods (voice, image, text) optimized for field use
+- Ensure retrieval systems provide context-aware results based on seasonal and operational factors
+- Benchmark retrieval accuracy against real farm management scenarios
+
+## Task Completion Protocol
+- When a development task is completed, provide a brief, standardized green task completion summary
+- Keep summaries concise and to the point - focus on key outcomes only
+- Include: what was accomplished, critical challenges overcome, and essential next steps
+- Limit to 3-8 check mark bullet points when possible
+- Format consistently for easy scanning and reference
+- Provide a copy-paste ready version for new chat contexts
