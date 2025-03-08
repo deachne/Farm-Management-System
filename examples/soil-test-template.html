@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soil Test Results Template</title>
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --primary-light: #dbeafe;
+      --text-color: #1f2937;
+      --border-color: #e5e7eb;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: var(--text-color);
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .form-title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    .form-section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: #f9fafb;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    
+    .form-row {
+      display: flex;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+      margin-right: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .form-group:last-child {
+      margin-right: 0;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .nutrient-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+    
+    .nutrient-table th {
+      text-align: left;
+      padding: 8px;
+      background-color: #f3f4f6;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nutrient-table td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nutrient-table input {
+      width: 100%;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+    
+    .nutrient-level {
+      display: flex;
+      align-items: center;
+    }
+    
+    .level-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    .level-low {
+      background-color: var(--danger-color);
+    }
+    
+    .level-medium {
+      background-color: var(--warning-color);
+    }
+    
+    .level-optimal {
+      background-color: var(--success-color);
+    }
+    
+    .level-high {
+      background-color: #8b5cf6;
+    }
+    
+    .recommendation-box {
+      background-color: #f3f4f6;
+      border-left: 4px solid var(--primary-color);
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .recommendation-title {
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    .file-upload {
+      border: 2px dashed var(--border-color);
+      padding: 20px;
+      text-align: center;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .file-upload-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #9ca3af;
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+    
+    .btn {
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-secondary {
+      background-color: white;
+      border: 1px solid var(--border-color);
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-header">
+    <div class="form-title">Soil Test Results</div>
+    <div>
+      <button class="btn btn-secondary">Save Draft</button>
+      <button class="btn btn-primary">Save & Complete</button>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <div class="section-title">Test Information</div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="field">Field</label>
+        <select id="field">
+          <option>Select a field...</option>
+          <option>North 40</option>
+          <option selected>South Quarter</option>
+          <option>Back 80</option>
+          <option>Home Quarter</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="test-date">Test Date</label>
+        <input type="date" id="test-date" value="2023-05-04">
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="lab">Testing Laboratory</label>
+        <input type="text" id="lab" value="AgriTest Labs">
+      </div>
+      
+      <div class="form-group">
+        <label for="sample-depth">Sample Depth</label>
+        <select id="sample-depth">
+          <option>Select depth...</option>
+          <option selected>0-6 inches</option>
+          <option>6-12 inches</option>
+          <option>12-24 inches</option>
+          <option>24-36 inches</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="test-type">Test Type</label>
+        <select id="test-type">
+          <option>Select type...</option>
+          <option selected>Standard Soil Analysis</option>
+          <option>Comprehensive Soil Health</option>
+          <option>Biological Activity</option>
+          <option>Micronutrient Panel</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="sample-id">Sample ID</label>
+        <input type="text" id="sample-id" value="SQ-2023-05">
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <div class="section-title">Soil Properties</div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="soil-ph">Soil pH</label>
+        <input type="text" id="soil-ph" value="6.8">
+      </div>
+      
+      <div class="form-group">
+        <label for="organic-matter">Organic Matter (%)</label>
+        <input type="text" id="organic-matter" value="3.2">
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="cec">CEC (meq/100g)</label>
+        <input type="text" id="cec" value="14.5">
+      </div>
+      
+      <div class="form-group">
+        <label for="base-saturation">Base Saturation (%)</label>
+        <input type="text" id="base-saturation" value="78">
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <div class="section-title">Nutrient Levels</div>
+    
+    <table class="nutrient-table">
+      <thead>
+        <tr>
+          <th>Nutrient</th>
+          <th>Result</th>
+          <th>Units</th>
+          <th>Status</th>
+          <th>Optimal Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nitrogen (NO₃-N)</td>
+          <td><input type="text" value="18"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-medium"></div>
+              Medium
+            </div>
+          </td>
+          <td>20-30 ppm</td>
+        </tr>
+        <tr>
+          <td>Phosphorus (P)</td>
+          <td><input type="text" value="42"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-high"></div>
+              High
+            </div>
+          </td>
+          <td>20-35 ppm</td>
+        </tr>
+        <tr>
+          <td>Potassium (K)</td>
+          <td><input type="text" value="185"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-optimal"></div>
+              Optimal
+            </div>
+          </td>
+          <td>175-250 ppm</td>
+        </tr>
+        <tr>
+          <td>Calcium (Ca)</td>
+          <td><input type="text" value="1250"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-optimal"></div>
+              Optimal
+            </div>
+          </td>
+          <td>1000-1500 ppm</td>
+        </tr>
+        <tr>
+          <td>Magnesium (Mg)</td>
+          <td><input type="text" value="120"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-optimal"></div>
+              Optimal
+            </div>
+          </td>
+          <td>100-150 ppm</td>
+        </tr>
+        <tr>
+          <td>Sulfur (S)</td>
+          <td><input type="text" value="8"></td>
+          <td>ppm</td>
+          <td>
+            <div class="nutrient-level">
+              <div class="level-indicator level-low"></div>
+              Low
+            </div>
+          </td>
+          <td>10-15 ppm</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="add-nutrient">Add Additional Nutrient</label>
+        <select id="add-nutrient">
+          <option>Select nutrient...</option>
+          <option>Zinc (Zn)</option>
+          <option>Manganese (Mn)</option>
+          <option>Boron (B)</option>
+          <option>Iron (Fe)</option>
+          <option>Copper (Cu)</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex: 0 0 auto; width: 100px;">
+        <label>&nbsp;</label>
+        <button class="btn btn-secondary" style="width: 100%;">Add</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <div class="section-title">Recommendations</div>
+    
+    <div class="recommendation-box">
+      <div class="recommendation-title">Phosphorus Application</div>
+      <p>Soil test results for South Quarter came back. Will need to adjust phosphorus application rate - higher than expected. Consider reducing P application by 15-20% from standard rate.</p>
+    </div>
+    
+    <div class="recommendation-box">
+      <div class="recommendation-title">Sulfur Deficiency</div>
+      <p>Sulfur levels are below optimal range. Consider applying 15-20 lbs/acre of sulfur before planting.</p>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="additional-recommendations">Additional Recommendations</label>
+        <textarea id="additional-recommendations" placeholder="Enter any additional recommendations or notes..."></textarea>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-section">
+    <div class="section-title">Attachments</div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label>Lab Report</label>
+        <div class="file-upload">
+          <div class="file-upload-icon">📄</div>
+          <div>Drag lab report PDF here or click to upload</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <button class="btn btn-secondary">Cancel</button>
+    <button class="btn btn-primary">Save Results</button>
+  </div>
+</body>
+</html> 

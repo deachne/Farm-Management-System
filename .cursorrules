@@ -15,6 +15,13 @@
 - Number documentation files for easy reference (e.g., 01-System-Overview.md)
 - Create dedicated directories for farm-specific extensions
 
+## Asset Organization
+- Store UI mockups and interface designs in assets/ui/mockups/
+- Keep field-related images in assets/field-data/
+- Maintain documentation images in assets/documentation/
+- Reference materials stored in assets/reference/
+- Equipment-related images in assets/field-data/equipment/
+
 ## ## Code Standards
 - Follow separation of concerns principles in all implementations
 - Store sensitive information like API keys in environment variables, not in code
@@ -68,3 +75,18 @@
 - Limit to 3-8 check mark bullet points when possible
 - Format consistently for easy scanning and reference
 - Provide a copy-paste ready version for new chat contexts
+
+## Technical Discussion Protocol
+
+- Before implementing any checklist item, conduct a focused technical discussion
+- Document key decisions and their rationale in a standardized format
+- For each component, address:
+  * Integration approach with AnythingLLM
+  * Technology selection and compatibility concerns
+  * Data flow and state management
+  * Mobile/field usability considerations
+  * Testing approach and acceptance criteria
+- Create a brief decision document for each major component
+- Reference applicable agricultural use cases when making technical decisions
+- Obtain sign-off from technical lead before beginning implementation
+- Link discussion outcomes to relevant checklist items and documentation
