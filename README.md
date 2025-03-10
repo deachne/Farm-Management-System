@@ -1,10 +1,19 @@
 # AnythingLLM Farm Management Extension
 
-An agricultural knowledge management system built as an extension for AnythingLLM, focusing on farm operations, field observations, and agricultural decision support.
+An agricultural knowledge management system built as an extension for AnythingLLM, focusing on farm operations, field observations, and agricultural decision support. The system integrates with both AnythingLLM and LibreChat to provide comprehensive agricultural chat capabilities.
 
 ## What is AnythingLLM?
 
 AnythingLLM is an open-source, locally hosted document chatbot that enables you to chat with your documents, websites, and other data sources using various LLM providers. It offers a user-friendly interface for document management, vector search, and conversational AI capabilities. This project extends AnythingLLM's core functionality with specialized features for agricultural applications.
+
+## LibreChat Integration
+
+This extension leverages LibreChat's capabilities to enhance the agricultural chat experience:
+- Specialized agricultural chat templates
+- Multi-modal field data input
+- Enhanced conversation context management
+- Agricultural terminology optimization
+- Seamless integration with AnythingLLM's document processing
 
 ## Project Overview
 
@@ -73,16 +82,34 @@ The farm management features are built as modular components that integrate with
 
 ## Documentation Structure
 
-1. `01-System-Overview.md` - System architecture and components
-2. `02-Technical-Architecture.md` - Technical implementation details
-3. `03-Data-Model.md` - Database schema and relationships
-4. `04-UI-Components.md` - User interface components
-5. `05-AI-Capabilities.md` - AI features implementation
-6. `06-MCP-Integration.md` - Model Context Protocol integration
-7. `07-Mobile-Experience.md` - Mobile design and functionality
-8. `08-Implementation-Roadmap.md` - Development timeline
-9. `13-Template-System-Design.md` - Document and visualization templates
-10. `14-Climate-FieldView-Integration.md` - Climate FieldView integration details
+1. `00-Project-Checklist.md` - Project progress and task tracking
+2. `0000-AnythingLLM-LibreChat-Reference.md` - Integration reference guide
+3. `01-System-Overview.md` - System architecture and components
+4. `02-Technical-Architecture.md` - Technical implementation details
+5. `03-Data-Model.md` - Database schema and relationships
+6. `04-UI-Components.md` - User interface components
+7. `04.1-Component-Library.md` - Shadcn/UI implementation and standards
+8. `05-AI-Capabilities.md` - AI features implementation
+9. `06-MCP-Integration.md` - Model Context Protocol integration
+10. `07-Mobile-Experience.md` - Mobile design and functionality
+11. `08-Implementation-Roadmap.md` - Development timeline
+12. `13-Template-System-Design.md` - Document and visualization templates
+13. `14-Climate-FieldView-Integration.md` - Climate FieldView integration details
+14. `18-Agricultural-Features.md` - Detailed agricultural functionality
+15. `21-FarmQA-Documentation.md` - Farm Q&A system documentation
+16. `22-Innovative-Agricultural-Solutions.md` - Advanced farming solutions
+17. `23-Crop-Planner-Implementation.md` - Crop planning system details
+18. `24-Field-Test-Integration.md` - Field testing framework
+
+## Technology Stack
+
+The system is built using modern web technologies:
+- **Frontend**: React with TypeScript
+- **UI Components**: Shadcn/UI for consistent design
+- **Styling**: TailwindCSS for responsive layouts
+- **Chat Integration**: AnythingLLM and LibreChat
+- **Documentation**: Comprehensive Markdown with diagrams
+- **Testing**: Jest for component testing
 
 ## Getting Started
 
@@ -116,7 +143,12 @@ npm run dev
 
 ## Development Status
 
-Currently in initial development phase. See `00-Project-Checklist.md` for current progress and upcoming tasks.
+Currently in initial development phase. See `00-Project-Checklist.md` for current progress and upcoming tasks. The project implements:
+- Shadcn/UI component library standards
+- LibreChat integration architecture
+- Agricultural chat templates
+- Field-optimized mobile interfaces
+- Comprehensive documentation structure
 
 ## Vision
 
