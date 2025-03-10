@@ -8,6 +8,15 @@
 - Document all integration points with the base AnythingLLM system
 - Test changes against the latest AnythingLLM version to ensure compatibility
 
+## LibreChat Integration Requirements
+- Maintain compatibility with both AnythingLLM and LibreChat architectures
+- Document all LibreChat integration points and dependencies
+- Follow LibreChat's patterns for chat functionality and message handling
+- Implement proper error handling for LibreChat-specific features
+- Ensure seamless user experience between AnythingLLM and LibreChat components
+- Test against both systems' latest versions for compatibility
+- Document any modifications needed in LibreChat for agricultural context
+
 ## Project Structure
 - Maintain a clear folder structure with separate directories for backend, frontend, and documentation
 - Use descriptive file names with a consistent naming convention
@@ -22,7 +31,7 @@
 - Reference materials stored in assets/reference/
 - Equipment-related images in assets/field-data/equipment/
 
-## ## Code Standards
+## Code Standards
 - Follow separation of concerns principles in all implementations
 - Store sensitive information like API keys in environment variables, not in code
 - Maintain a requirements.txt with specific version numbers for reproducibility
@@ -30,6 +39,20 @@
 - For FastAPI apps, follow project-specific conventions for app structure
 - Preserve existing functionality when making changes
 - Follow AnythingLLM's existing patterns for state management and API design
+- Implement consistent error handling across AnythingLLM and LibreChat integrations
+- Use TypeScript for type safety in frontend components
+- Follow both AnythingLLM and LibreChat coding conventions where applicable
+
+## Component Library Standards
+- Use Shadcn/UI as the primary component library for consistent UI/UX
+- Extend Shadcn/UI components with agricultural-specific features when needed
+- Maintain Shadcn/UI's accessibility standards across custom components
+- Follow Shadcn/UI's theming system for consistent styling
+- Implement responsive design using Shadcn/UI's built-in utilities
+- Document any customizations made to Shadcn/UI components
+- Use Shadcn/UI's form components for standardized data entry
+- Leverage Shadcn/UI's layout components for consistent page structure
+- Ensure proper integration with both AnythingLLM and LibreChat styling patterns
 
 ## Agricultural System Specifics
 - Implement specialized data models for farm-specific information
@@ -49,14 +72,16 @@
 - Create specific documentation for AnythingLLM integration points
 
 ## Development Process
-- Start with an integration analysis to identify AnythingLLM touch points
+- Start with an integration analysis to identify AnythingLLM and LibreChat touch points
 - Create an integration plan before implementing any features
+- Document dependencies and version requirements for both systems
 - Implement features in the order specified in the project checklist
 - Test each component thoroughly before moving to the next
 - Ensure mobile compatibility for field-focused features
 - Optimize for performance and offline capabilities where appropriate
-- Maintain backward compatibility with existing AnythingLLM features
-- Regularly test with the base AnythingLLM system during development
+- Maintain backward compatibility with existing AnythingLLM and LibreChat features
+- Regularly test with both base systems during development
+- Document any conflicts or compatibility issues between the systems
 
 ## Data Capture & Retrieval Excellence
 - Optimize vectorization specifically for agricultural terminology and field observations
@@ -90,3 +115,13 @@
 - Reference applicable agricultural use cases when making technical decisions
 - Obtain sign-off from technical lead before beginning implementation
 - Link discussion outcomes to relevant checklist items and documentation
+
+## Testing Protocol
+- Implement comprehensive testing for both AnythingLLM and LibreChat integrations
+- Create test cases for agricultural-specific chat scenarios
+- Test chat functionality in offline and limited connectivity scenarios
+- Verify proper handling of multi-modal farm data inputs
+- Ensure consistent behavior across both integration points
+- Document test coverage for both systems
+- Maintain separate test suites for system-specific features
+- Regular integration testing between both systems

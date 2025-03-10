@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Details - Canola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Top Navigation -->
+        <nav class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <div class="flex-shrink-0 flex items-center">
+                            <a href="cropplan-prototype.html" class="text-blue-600 hover:text-blue-800">
+                                ← Back to Summary
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded-md">
+                            Crop: Canola
+                        </span>
+                        <span class="px-3 py-1 text-sm bg-green-100 text-green-800 rounded-md">
+                            Acres: 2000
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <!-- Operating Costs Card -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Operating Costs</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-gray-700">Seed & Treatment</label>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500">$</span>
+                                <input type="number" value="75.44" class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                <span class="text-sm text-gray-500">/acre</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-gray-700">Fertilizer</label>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500">$</span>
+                                <input type="number" value="156.08" class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                <span class="text-sm text-gray-500">/acre</span>
+                            </div>
+                        </div>
+                        <!-- Add more cost inputs -->
+                    </div>
+                </div>
+
+                <!-- Profitability Card -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Profitability Metrics</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-gray-700">Expected Yield</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" value="47" class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                <span class="text-sm text-gray-500">bu/acre</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-gray-700">Market Price</label>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500">$</span>
+                                <input type="number" value="13.41" class="w-24 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                <span class="text-sm text-gray-500">/bu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <dl class="grid grid-cols-2 gap-4">
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Gross Revenue/acre</dt>
+                                <dd class="mt-1 text-lg font-semibold text-gray-900">$630.11</dd>
+                            </div>
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Operating Costs/acre</dt>
+                                <dd class="mt-1 text-lg font-semibold text-gray-900">$463.83</dd>
+                            </div>
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Net Profit/acre</dt>
+                                <dd class="mt-1 text-lg font-semibold text-green-600">$166.28</dd>
+                            </div>
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Operating Expense Ratio</dt>
+                                <dd class="mt-1 text-lg font-semibold text-gray-900">73.6%</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Chemical Applications -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Chemical Applications</h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Product</label>
+                                <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                                    <option>Liberty</option>
+                                    <option>Roundup</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Rate/acre</label>
+                                <input type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Cost/acre</label>
+                                <input type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                        </div>
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            + Add Application
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Field Notes -->
+                <div class="bg-white shadow rounded-lg p-6">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Field Notes</h2>
+                    <div class="space-y-4">
+                        <textarea rows="4" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Add notes about this crop..."></textarea>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>Last updated: 2024-03-14</span>
+                            <button class="text-blue-600 hover:text-blue-800">Save Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-end space-x-4">
+                <button class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Export Crop Data
+                </button>
+                <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Save Changes
+                </button>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

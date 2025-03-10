@@ -66,6 +66,7 @@
 - [ ] Develop field analytics dashboard
 - [ ] Build treatment tracking system
 - [ ] Implement yield data visualization
+- [ ] Integrate field testing tools (Microbiometer, ATP Nutriscan)
 
 ### Crop Management System
 - [ ] Implement growth stage tracking
@@ -73,6 +74,24 @@
 - [ ] Develop crop planning tools
 - [ ] Build variety selection system
 - [ ] Implement crop rotation planning
+
+### Crop Planner Implementation
+- [ ] Implement core calculator functionality
+  - [ ] Build input forms for prices, yields, and costs
+  - [ ] Develop calculation logic for profitability and breakeven analysis
+  - [ ] Create summary views and dashboards
+- [ ] Develop field management component
+  - [ ] Create field records database schema
+  - [ ] Build allocation interface with drag-and-drop functionality
+  - [ ] Implement rotation management and compliance checking
+- [ ] Implement spreadsheet integration
+  - [ ] Build import/export functionality for Excel/Google Sheets
+  - [ ] Create template system for different farm types
+  - [ ] Develop synchronization mechanism with change tracking
+- [ ] Add AI enhancement layer
+  - [ ] Implement natural language interface for plan queries
+  - [ ] Create automated insights for profitability and risk analysis
+  - [ ] Develop decision support tools for crop mix optimization
 
 ### Enhanced Agricultural Agents
 - [ ] Implement Equipment Manager Agent
@@ -87,6 +106,7 @@
 - [ ] Create voice input/output features
 - [ ] Develop location-based features
 - [ ] Build multi-modal context integration
+- [ ] Implement test result image processing
 
 ### Advanced Tool Integration
 - [ ] Implement remaining agricultural tools
@@ -124,6 +144,7 @@
 - [ ] Develop location-aware features
 - [ ] Build battery-efficient operations
 - [ ] Implement reduced bandwidth mode
+- [ ] Create specialized test capture interface
 
 ### System Integration
 - [ ] Implement data synchronization
@@ -158,9 +179,11 @@
 ### Agricultural Components
 - [ ] Field management system
 - [ ] Crop management system
+- [ ] Crop planner system with calculator and spreadsheet integration
 - [ ] Equipment management system
 - [ ] Market intelligence system
 - [ ] Agricultural knowledge base
+- [ ] Field testing integration system
 
 ## Key Deliverables
 
@@ -177,6 +200,8 @@
 - [ ] Tool and artifact framework
 - [ ] Mobile field experience
 - [ ] Agricultural knowledge management
+- [ ] Crop planning and profitability analysis
+- [ ] Field test result capture and analysis
 
 ### User Experience
 - [ ] Responsive web interface
@@ -199,6 +224,7 @@
 | 1     | Artifact System Core | Not Started | 0% | |
 | 2     | Advanced Field Management | Not Started | 0% | |
 | 2     | Crop Management System | Not Started | 0% | |
+| 2     | Crop Planner Implementation | Not Started | 0% | |
 | 2     | Enhanced Agricultural Agents | Not Started | 0% | |
 | 2     | Multi-Modal Support | Not Started | 0% | |
 | 2     | Advanced Tool Integration | Not Started | 0% | |
@@ -216,3 +242,5 @@
 3. Analyze LibreChat artifact and tool systems
 4. Design and implement integration layer foundation
 5. Begin development of agricultural-specific components
+6. Start implementation of Crop Planner core calculator functionality
+7. Develop field test integration components for Microbiometer and ATP Nutriscan

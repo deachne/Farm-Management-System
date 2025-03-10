@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Plan 2024 - Detailed View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Left Sidebar -->
+    <div class="flex h-screen">
+        <div class="w-64 bg-white shadow-sm border-r">
+            <div class="p-4">
+                <h1 class="text-xl font-bold text-gray-900">Crop Planner</h1>
+                <p class="text-sm text-gray-600">Nestibo Farms • 2024 Season</p>
+                <p class="text-sm text-gray-600">5,000 Acres</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#" class="flex items-center px-4 py-2 bg-blue-50 text-blue-700 border-l-4 border-blue-500">
+                    <span>Plan Summary</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50">
+                    <span>Operating Costs</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50">
+                    <span>Field Allocation</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50">
+                    <span>Risk Analysis</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50">
+                    <span>AI Insights</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <div class="p-8">
+                <!-- Top Summary Cards -->
+                <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-medium text-gray-900">Total Revenue</h3>
+                                <div class="mt-1">
+                                    <div class="text-2xl font-bold text-gray-900">$2,847,500</div>
+                                    <div class="text-sm text-green-600">+4.3% from last year</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-medium text-gray-900">Net Profit</h3>
+                                <div class="mt-1">
+                                    <div class="text-2xl font-bold text-gray-900">$622,500</div>
+                                    <div class="text-sm text-gray-600">$124.50 per acre</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-medium text-gray-900">Operating Expense Ratio</h3>
+                                <div class="mt-1">
+                                    <div class="text-2xl font-bold text-gray-900">73.6%</div>
+                                    <div class="text-sm text-gray-600">Industry avg: 75%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Cost Breakdown -->
+                <div class="bg-white rounded-lg shadow mb-6">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900">Operating Costs ($/acre)</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Category
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Average
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Canola
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Wheat
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Barley
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Operating Costs -->
+                                <tr class="bg-gray-50">
+                                    <td colspan="5" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        A. Operating Costs
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Seed & Treatment</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$62.63</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$75.44</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$30.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$31.20</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Fertilizer</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$124.44</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$156.08</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$98.30</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$98.30</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Herbicide</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$21.43</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$17.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$21.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$21.00</td>
+                                </tr>
+                                <!-- Fixed Costs -->
+                                <tr class="bg-gray-50">
+                                    <td colspan="5" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        B. Fixed Costs
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Land Costs</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$45.43</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$45.43</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$45.43</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$45.43</td>
+                                </tr>
+                                <!-- Total Costs -->
+                                <tr class="bg-gray-100 font-medium">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Total Costs</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$509.18</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$539.75</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$445.79</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$443.17</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Profitability Analysis -->
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <!-- Profitability Metrics -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-medium text-gray-900">Profitability Analysis</h2>
+                        </div>
+                        <div class="p-6">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metric</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Avg. Market Price $/unit</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$13.41</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Yield per acre (bu or lb)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">47</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Operating Expense Ratio</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">73.6%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Breakeven Analysis -->
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-lg font-medium text-gray-900">Breakeven Analysis</h2>
+                        </div>
+                        <div class="p-6">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operating Costs</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Costs</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Breakeven Yield (bu or lb)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">35</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Breakeven Price ($/bu)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$9.87</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">$11.46</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field Allocation -->
+                <div class="mt-6 bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900">Field Allocation</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                            <div class="col-span-2">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Field</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acres</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">2024 Crop</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Previous Crop</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">North 40</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">320</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                    Canola
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Wheat</td>
+                                        </tr>
+                                        <!-- Add more fields as needed -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="text-sm font-medium text-gray-900 mb-3">Allocation Summary</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm text-gray-500">Canola</span>
+                                            <span class="text-sm text-gray-900">2,200 acres</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm text-gray-500">Wheat</span>
+                                            <span class="text-sm text-gray-900">1,800 acres</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-sm text-gray-500">Barley</span>
+                                            <span class="text-sm text-gray-900">650 acres</span>
+                                        </div>
+                                        <div class="pt-2 mt-2 border-t border-gray-200">
+                                            <div class="flex justify-between font-medium">
+                                                <span class="text-sm text-gray-900">Total</span>
+                                                <span class="text-sm text-gray-900">5,000 acres</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="mt-6 flex justify-between items-center">
+                    <div class="flex space-x-4">
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                            Update Prices
+                        </button>
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                            Recalculate
+                        </button>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50">
+                            Export to Excel
+                        </button>
+                        <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700">
+                            Save Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - AI Analysis -->
+        <div class="w-80 bg-white border-l">
+            <div class="p-4 border-b">
+                <h2 class="text-lg font-medium text-gray-900">AI Insights</h2>
+            </div>
+            <div class="p-4">
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-blue-900 mb-2">Profitability Analysis</h3>
+                        <p class="text-sm text-blue-700">Canola shows the highest profit margin at $185.75/acre, 43% above wheat.</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-yellow-900 mb-2">Risk Assessment</h3>
+                        <p class="text-sm text-yellow-700">Current crop mix provides good risk balance. Consider weather insurance for canola acres.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-green-900 mb-2">Rotation Analysis</h3>
+                        <p class="text-sm text-green-700">Field rotation plan follows best practices. North 40 suitable for canola after wheat.</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="ai-question" class="sr-only">Ask AI</label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                        <input type="text" name="ai-question" id="ai-question" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300" placeholder="Ask about your plan...">
+                        <button class="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-500 sm:text-sm">
+                            Ask
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
