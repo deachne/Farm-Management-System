@@ -101,6 +101,8 @@
 - Format consistently for easy scanning and reference
 - Provide a copy-paste ready version for new chat contexts
 
+when task is completed, besides the protocols, ask only the most important next step as a question!!
+
 ## Technical Discussion Protocol
 
 - Before implementing any checklist item, conduct a focused technical discussion

@@ -1,3 +1,9 @@
 [submodule "anything-llm"]
 	path = anything-llm
 	url = https://github.com/Mintplex-Labs/anything-llm.git
+[submodule "farm-management-system/integrations/anything-llm"]
+	path = farm-management-system/integrations/anything-llm
+	url = https://github.com/Mintplex-Labs/anything-llm.git
+[submodule "farm-management-system/integrations/librechat"]
+	path = farm-management-system/integrations/librechat
+	url = https://github.com/danny-avila/LibreChat.git
