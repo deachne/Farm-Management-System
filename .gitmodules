@@ -7,3 +7,9 @@
 [submodule "farm-management-system/integrations/librechat"]
 	path = farm-management-system/integrations/librechat
 	url = https://github.com/danny-avila/LibreChat.git
+[submodule "bizzy/core/anythingllm"]
+	path = bizzy/core/anythingllm
+	url = https://github.com/Mintplex-Labs/anything-llm.git
+[submodule "bizzy/core/librechat"]
+	path = bizzy/core/librechat
+	url = https://github.com/danny-avila/LibreChat.git

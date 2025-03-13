@@ -1,0 +1,46 @@
+{
+  "name": "bizzy-farmer",
+  "version": "0.1.0",
+  "description": "Agricultural management extension for BizzyPerson",
+  "author": "BizzyPerson Team",
+  "license": "MIT",
+  "dependencies": {
+    "core": ">=0.1.0"
+  },
+  "hooks": [
+    "document-processor",
+    "chat-tool",
+    "ui-component",
+    "knowledge-template"
+  ],
+  "permissions": [
+    "read-documents",
+    "write-documents",
+    "use-chat",
+    "manage-fields",
+    "manage-crops",
+    "manage-equipment"
+  ],
+  "dataModels": [
+    "field",
+    "crop",
+    "equipment",
+    "soil-test",
+    "weather-data",
+    "harvest-record"
+  ],
+  "tools": [
+    "field-analyzer",
+    "crop-planner",
+    "equipment-scheduler",
+    "weather-forecaster",
+    "yield-calculator"
+  ],
+  "uiComponents": [
+    "field-map",
+    "crop-calendar",
+    "equipment-dashboard",
+    "weather-widget",
+    "yield-chart"
+  ]
+} 

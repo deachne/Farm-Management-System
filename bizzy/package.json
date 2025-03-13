@@ -1,0 +1,35 @@
+{
+  "name": "bizzy-person",
+  "version": "0.1.0",
+  "description": "A flexible AI-powered knowledge management platform with extensible industry-specific modules",
+  "main": "index.js",
+  "scripts": {
+    "init": "bash ./scripts/init-project.sh",
+    "update-anythingllm": "bash ./scripts/update-anythingllm.sh",
+    "update-librechat": "bash ./scripts/update-librechat.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/bizzy-person.git"
+  },
+  "keywords": [
+    "ai",
+    "knowledge-management",
+    "chat",
+    "document-processing",
+    "extension-framework"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/bizzy-person/issues"
+  },
+  "homepage": "https://github.com/yourusername/bizzy-person#readme",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    
+  }
+} 
