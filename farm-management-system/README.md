@@ -1,27 +1,31 @@
-# Farm Management System
+# BizzyPerson
 
-An intelligent farm management system integrating AnythingLLM and LibreChat for advanced agricultural operations management.
+A flexible AI-powered knowledge management platform integrating AnythingLLM and LibreChat with extensible industry-specific modules.
 
 ## Overview
 
-This system provides comprehensive farm management capabilities with AI-powered assistance for:
-- Field management and monitoring
-- Crop planning and optimization
-- Equipment tracking and maintenance
-- Agricultural data analysis
-- Mobile field operations support
+BizzyPerson provides a core platform with:
+- Document processing and knowledge management
+- Multi-modal chat and AI assistance
+- Extension framework for industry-specific features
+- Mobile-friendly interface for field use
+- Plugin system for specialized tools
 
 ## Project Structure
 
 ```
-farm-management-system/
+bizzy/
+├── core/                # BizzyPerson core platform
+│   ├── anythingllm/     # AnythingLLM integration
+│   ├── librechat/       # LibreChat integration
+│   ├── shared/          # Shared components
+│   └── extension-api/   # Extension framework
+├── extensions/          # Industry-specific extensions
 ├── docs/                # Documentation
-├── src/                 # Source code
-├── assets/             # Static assets
-├── integrations/       # Integration code
-├── config/            # Configuration files
-├── tests/             # Test files
-└── scripts/           # Utility scripts
+├── assets/              # Static assets
+├── config/              # Configuration files
+├── tests/               # Test files
+└── scripts/             # Utility scripts
 ```
 
 ## Getting Started
@@ -35,11 +39,18 @@ farm-management-system/
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
 
-## Integration Components
+## Core Components
 
-- AnythingLLM: AI-powered knowledge management
-- LibreChat: Advanced chat capabilities
-- Agricultural Extensions: Domain-specific features
+- **AnythingLLM Integration**: Document processing and knowledge management
+- **LibreChat Integration**: Advanced chat and multi-modal capabilities
+- **Extension Framework**: System for building industry-specific modules
+- **Plugin Registry**: Management of MCP and tool plugins
+
+## Planned Extensions
+
+- **BizzyFarmer**: Agricultural management extension
+- **BizzyAccounting**: Financial management extension
+- **BizzyConstruction**: Construction management extension
 
 ## License
 
