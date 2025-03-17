@@ -2,11 +2,11 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 /**
- * A utility function that combines clsx and tailwind-merge to allow for conditional
- * class names and proper handling of Tailwind CSS class conflicts.
+ * Merge class names with tailwind-merge
+ * This is useful for conditionally applying classes
+ * and merging tailwind utility classes.
  * 
- * @param inputs - Class names or conditional class name objects to merge
- * @returns A merged string of class names with Tailwind conflicts resolved
+ * @example cn('font-bold', { 'text-red-500': isError })
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
