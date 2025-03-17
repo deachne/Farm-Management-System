@@ -28,6 +28,7 @@ This document serves as a reference map between our structured, numbered documen
 | `Dynamic UI Templates Explained.md` | `bp06-UI-Components.md` | UI template system, component architecture |
 | `AnythingLLM Integration Feasibility Analysis.md` | `bp02-Integration-Architecture.md` | Integration feasibility, technical considerations |
 | `09-mobile-views-ideas.md` | `bp06-UI-Components.md`, `bf03-Mobile-Field-Tools.md` | Mobile UI concepts, field observation tools |
+| `LibreChat-multi-modal-capabilities.md` | `bp-int--multi-modal-integration.md`, `bp-Unified-UI-Integration.md` | Multi-modal capabilities, integration strategy |
 
 ## Key Information Verification
 
@@ -40,6 +41,14 @@ This document serves as a reference map between our structured, numbered documen
 - **MCP Tools (BP05)**: Includes tool specifications from `farm-app-mcp-server-design.md` and `mcp-clients-analysis.md`
 - **UI Components (BP06)**: Based on UI architecture from `Dynamic UI Templates Explained.md` and mobile concepts from `09-mobile-views-ideas.md`
 - **Efficient RAG Architecture (BP07)**: Incorporates RAG improvements from `001.2-suggestions-rag-improvement.md` and vectorization strategies from `anythingllm-vectorization-analysis.md`
+- **Unified UI Integration (BP-Unified-UI-Integration)**: Details the approach for integrating AnythingLLM and LibreChat UIs with multi-modal capabilities
+- **Multi-Modal Integration (BP-INT-07)**: Provides detailed strategy for implementing LibreChat's multi-modal capabilities within AnythingLLM
+
+### Integration Documentation
+
+- **Chat Integration (BP-INT-05)**: Details the integration of LibreChat's chat capabilities with AnythingLLM
+- **Multi-Modal Integration (BP-INT-07)**: Outlines the strategy for integrating LibreChat's multi-modal capabilities into AnythingLLM
+- **Knowledge Base Integration (BP-INT-04)**: Describes the integration of knowledge base capabilities between systems
 
 ### BizzyFarmer Extension Documentation
 
@@ -57,6 +66,7 @@ The following information from original files should be incorporated into our nu
 2. Mobile observation workflow from `09-mobile-views-ideas.md` should be expanded in `bf03-Mobile-Field-Tools.md`
 3. Weather integration details should be formalized in `bf04-Weather-Integration.md`
 4. Equipment management specifications should be added to `bf05-Equipment-Management.md`
+5. Multi-modal field data capture workflows should be added to `bp-int--multi-modal-integration.md`
 
 ## Next Steps
 

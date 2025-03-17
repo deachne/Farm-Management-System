@@ -14,6 +14,9 @@ const extensionApi = require('./extension-api/hooks');
 const knowledgeBase = require('./shared/knowledge-base');
 const anythingLLMKnowledgeBase = require('./anythingllm/knowledge-base-integration');
 const libreChatKnowledgeBase = require('./librechat/knowledge-base-integration');
+const chat = require('./shared/chat');
+const anythingLLMChat = require('./anythingllm/chat-integration');
+const libreChatChat = require('./librechat/chat-integration');
 
 /**
  * Initialize the BizzyPerson platform
@@ -25,6 +28,9 @@ async function initialize() {
     // Initialize knowledge base integration
     await initializeKnowledgeBaseIntegration();
     
+    // Initialize chat integration
+    await initializeChatIntegration();
+    
     // Load extensions
     await loadExtensions();
     
@@ -35,7 +41,10 @@ async function initialize() {
       extensionApi,
       knowledgeBase,
       anythingLLMKnowledgeBase,
-      libreChatKnowledgeBase
+      libreChatKnowledgeBase,
+      chat,
+      anythingLLMChat,
+      libreChatChat
     };
   } catch (error) {
     console.error('Error initializing BizzyPerson platform:', error);
@@ -62,6 +71,29 @@ async function initializeKnowledgeBaseIntegration() {
     console.log('Knowledge base integration initialized successfully');
   } catch (error) {
     console.error('Error initializing knowledge base integration:', error);
+    throw error;
+  }
+}
+
+/**
+ * Initialize the chat integration
+ */
+async function initializeChatIntegration() {
+  try {
+    console.log('Initializing chat integration...');
+    
+    // Initialize the shared chat
+    await chat.initialize();
+    
+    // Initialize AnythingLLM chat integration
+    await anythingLLMChat.initialize();
+    
+    // Initialize LibreChat chat integration
+    await libreChatChat.initialize();
+    
+    console.log('Chat integration initialized successfully');
+  } catch (error) {
+    console.error('Error initializing chat integration:', error);
     throw error;
   }
 }
@@ -170,15 +202,43 @@ async function syncWorkspaceWithLibreChatRag(workspaceId) {
   }
 }
 
+/**
+ * Send a chat message using the integrated chat system
+ * 
+ * @param {string} message - Chat message
+ * @param {object} options - Chat options
+ * @returns {Promise<object>} Chat response
+ */
+async function sendChatMessage(message, options = {}) {
+  try {
+    console.log(`Sending chat message: ${message}`);
+    
+    // Forward the chat message to AnythingLLM chat integration
+    return await anythingLLMChat.forwardChatToLibreChat(
+      options.workspaceId,
+      message,
+      options.conversationId,
+      options.systemPrompt
+    );
+  } catch (error) {
+    console.error('Error sending chat message:', error);
+    throw error;
+  }
+}
+
 // Export the BizzyPerson API
 module.exports = {
   initialize,
   processDocument,
   queryKnowledgeBase,
   syncWorkspaceWithLibreChatRag,
+  sendChatMessage,
   documentProcessing,
   extensionApi,
   knowledgeBase,
   anythingLLMKnowledgeBase,
-  libreChatKnowledgeBase
+  libreChatKnowledgeBase,
+  chat,
+  anythingLLMChat,
+  libreChatChat
 }; 
