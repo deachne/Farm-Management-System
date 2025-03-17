@@ -1,5 +1,11 @@
 # BizzyPerson - Project Guidelines
 
+## GitHub Repository Information
+- This project's main repository is located at: https://github.com/deachne/Farm-Management-System.git
+- All changes should be committed and pushed to this repository only
+- Do not attempt to push changes to the original AnythingLLM or LibreChat repositories
+- Submodule changes should be committed to the main repository
+
 ## AnythingLLM Integration Focus
 - Develop a clear integration plan with AnythingLLM before making code changes
 - Use AnythingLLM's UI as the primary interface for the unified experience
