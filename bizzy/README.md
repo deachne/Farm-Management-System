@@ -22,6 +22,7 @@ Key documentation files:
 - [BP01: System Overview](./docs/bp01-System-Overview.md) - System architecture and components
 - [BP04: Project Checklist](./docs/bp04-Project-Checklist.md) - Current implementation status
 - [BP05: Documentation Guidelines](./docs/bp05-Documentation-Guidelines.md) - Documentation standards
+- [BP07: Environment Variables](./docs/bp07-Environment-Variables.md) - Environment configuration
 - [BF01: Extension Overview](./docs/bf01-Extension-Overview.md) - BizzyFarmer extension details
 
 See the [docs README](./docs/README.md) for a complete list of documentation files.
@@ -48,10 +49,23 @@ bizzy/
 
 1. Clone the repository
 2. Install dependencies
-3. Configure environment variables
+3. Configure environment variables:
+   - Copy `.env.example` to `.env` in the project root
+   - Edit the `.env` file with your configuration
+   - Run `node scripts/setup-env.js` to propagate settings to subsystems
 4. Run development server
 
 For detailed setup instructions, see [BP03: Next Steps](./docs/bp03-Next-Steps.md).
+
+## Environment Configuration
+
+BizzyPerson uses a centralized environment variables approach:
+
+1. A single `.env` file in the project root contains all configuration
+2. The `setup-env.js` script propagates settings to AnythingLLM and LibreChat
+3. Environment variables follow a namespaced approach (e.g., `ANYTHINGLLM_*`, `LIBRECHAT_*`)
+
+For detailed environment configuration, see [BP07: Environment Variables](./docs/bp07-Environment-Variables.md).
 
 ## Development
 
