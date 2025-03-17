@@ -1,0 +1,4 @@
+# This is an empty migration.toml file
+# It is used by Prisma to track migrations
+
+migration_name = "20240313000000_init" 

@@ -1,5 +1,53 @@
 # Contributing to Farm Management System
 
+Thank you for considering contributing to the Farm Management System! This document outlines the process for contributing to the project.
+
+## Development Process
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Code Standards
+
+- Follow the existing code style
+- Write clear, concise commit messages
+- Include tests for new features
+- Update documentation as needed
+
+## Project Structure
+
+- `src/metadata/`: Enhanced metadata system
+- `src/document-processing/`: Document processing pipeline
+- `src/retrieval/`: Contextual retrieval system
+- `src/librechat-integration/`: LibreChat MCP tools
+- `docs/`: Documentation
+- `tests/`: Tests
+
+## Testing
+
+Run tests with:
+
+```
+npm test
+```
+
+## Documentation
+
+Please update the documentation when making changes to the codebase. Documentation is located in the `docs/` directory.
+
+## Pull Request Process
+
+1. Ensure your code follows the project's coding standards
+2. Update the README.md or documentation with details of changes if appropriate
+3. The PR will be merged once it has been reviewed and approved
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the project's MIT License.
+
 ## Development Guidelines
 
 ### Code Standards
@@ -31,19 +79,3 @@
 - Include agricultural-specific scenarios
 - Test offline functionality
 - Maintain separate test suites for different components
-
-## Development Process
-
-1. Fork the repository
-2. Create a feature branch
-3. Implement changes
-4. Write/update tests
-5. Submit pull request
-
-## Pull Request Process
-
-1. Update documentation
-2. Add/update tests
-3. Update changelog
-4. Get review approval
-5. Merge to main branch

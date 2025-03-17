@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Extended document model
+model documents {
+  id                Int                     @id @default(autoincrement())
+  docId             String                  @unique
+  filename          String
+  docpath           String
+  workspaceId       Int
+  metadata          String?
+  pinned            Boolean?                @default(false)
+  watched           Boolean?                @default(false)
+  createdAt         DateTime                @default(now())
+  lastUpdatedAt     DateTime                @default(now())
+  
+  // Enhanced metadata fields
+  schema            Json?                   // For storing table schemas
+  document_type     String?                 // Document categorization
+  custom_tags       String?                 // JSON string of custom tags
+  related_docs      String?                 // References to related documents
+  industry_metadata Json?                   // Extension-specific metadata
+  
+  // Relations
+  sections          document_sections[]
+  rows              document_rows[]
+  source_relations  document_relationships[] @relation("SourceDocument")
+  target_relations  document_relationships[] @relation("TargetDocument")
+}
+
+// Model for document sections
+model document_sections {
+  id            Int       @id @default(autoincrement())
+  document_id   Int
+  section_title String?
+  content       String
+  order_index   Int
+  document      documents @relation(fields: [document_id], references: [id], onDelete: Cascade)
+}
+
+// Model for tabular data
+model document_rows {
+  id            Int       @id @default(autoincrement())
+  document_id   Int
+  row_data      Json      // Store row data as JSON
+  document      documents @relation(fields: [document_id], references: [id], onDelete: Cascade)
+}
+
+// Model for document relationships
+model document_relationships {
+  id              Int       @id @default(autoincrement())
+  source_doc_id   Int
+  target_doc_id   Int
+  relationship    String    // Type of relationship
+  metadata        Json?     // Additional relationship metadata
+  source_document documents @relation("SourceDocument", fields: [source_doc_id], references: [id], onDelete: Cascade)
+  target_document documents @relation("TargetDocument", fields: [target_doc_id], references: [id], onDelete: Cascade)
+}
+
+// Farm-specific metadata models
+model farm_fields {
+  id            Int       @id @default(autoincrement())
+  name          String
+  location      String?
+  size          Float?    // Size in acres/hectares
+  soil_type     String?
+  crop_history  Json?     // JSON array of past crops
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+}
+
+model farm_crops {
+  id            Int       @id @default(autoincrement())
+  name          String
+  variety       String?
+  planting_date DateTime?
+  harvest_date  DateTime?
+  field_id      Int?
+  status        String?
+  notes         String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+}
+
+model farm_equipment {
+  id            Int       @id @default(autoincrement())
+  name          String
+  type          String?
+  manufacturer  String?
+  model         String?
+  purchase_date DateTime?
+  status        String?
+  maintenance   Json?     // JSON array of maintenance records
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+} 
