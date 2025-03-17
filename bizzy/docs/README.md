@@ -15,6 +15,10 @@ This directory contains documentation for the BizzyPerson project, including sys
 | [bp04-Project-Checklist.md](bp04-Project-Checklist.md) | Simplified implementation status checklist |
 | [bp05-Documentation-Guidelines.md](bp05-Documentation-Guidelines.md) | Documentation standards and guidelines |
 | [bp06-Checklist-Usage-Guide.md](bp06-Checklist-Usage-Guide.md) | Guide for using and maintaining project checklists |
+| [bp07-Checklist-Organization.md](bp07-Checklist-Organization.md) | Explanation of checklist organization and task ID system |
+| [bp07-Environment-Variables.md](bp07-Environment-Variables.md) | Environment variables configuration guide |
+| [bp08-Docker-Compose-Setup.md](bp08-Docker-Compose-Setup.md) | Docker Compose development environment setup |
+| [bp08-Unified-UI-Integration.md](bp08-Unified-UI-Integration.md) | Approach for integrating AnythingLLM and LibreChat into a unified UI |
 
 ### BizzyFarmer Extension Documentation (BF prefix)
 
@@ -48,8 +52,10 @@ If you're contributing to the project, these documents are essential:
 
 1. [bp05-Documentation-Guidelines.md](bp05-Documentation-Guidelines.md) - Learn how to maintain documentation
 2. [bp06-Checklist-Usage-Guide.md](bp06-Checklist-Usage-Guide.md) - Understand how to track progress
-3. [architecture/integration-architecture.md](architecture/integration-architecture.md) - Understand the integration architecture
-4. [api/extension-api.md](api/extension-api.md) - Learn about the extension API
+3. [bp07-Checklist-Organization.md](bp07-Checklist-Organization.md) - Learn about task IDs and checklist structure
+4. [bp08-Unified-UI-Integration.md](bp08-Unified-UI-Integration.md) - Understand the UI integration approach
+5. [architecture/integration-architecture.md](architecture/integration-architecture.md) - Understand the integration architecture
+6. [api/extension-api.md](api/extension-api.md) - Learn about the extension API
 
 ### For Project Managers
 
@@ -63,4 +69,4 @@ If you're managing the project, focus on these documents:
 
 Before contributing to the documentation, please read [bp05-Documentation-Guidelines.md](bp05-Documentation-Guidelines.md) to understand our documentation standards and processes.
 
-When updating checklists, please follow the guidelines in [bp06-Checklist-Usage-Guide.md](bp06-Checklist-Usage-Guide.md) to maintain consistency between the master and implementation checklists. 
+When updating checklists, please follow the guidelines in [bp06-Checklist-Usage-Guide.md](bp06-Checklist-Usage-Guide.md) and [bp07-Checklist-Organization.md](bp07-Checklist-Organization.md) to maintain consistency between the master and implementation checklists and to use the task ID system correctly. 

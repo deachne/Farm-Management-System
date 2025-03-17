@@ -1,0 +1,166 @@
+version: '3'
+
+name: bizzyperson
+
+networks:
+  bizzyperson-network:
+    driver: bridge
+
+services:
+  # BizzyPerson Core Service
+  bizzy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bizzy-core
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    depends_on:
+      - anythingllm
+      - librechat
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    networks:
+      - bizzyperson-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # AnythingLLM Service
+  anythingllm:
+    build:
+      context: ./core/anythingllm
+      dockerfile: ./docker/Dockerfile
+      args:
+        ARG_UID: ${UID:-1000}
+        ARG_GID: ${GID:-1000}
+    container_name: bizzy-anythingllm
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - "./core/anythingllm/.env:/app/server/.env"
+      - "./core/anythingllm/server/storage:/app/server/storage"
+      - "./core/anythingllm/collector/hotdir/:/app/collector/hotdir"
+      - "./core/anythingllm/collector/outputs/:/app/collector/outputs"
+    user: "${UID:-1000}:${GID:-1000}"
+    ports:
+      - "${ANYTHINGLLM_SERVER_PORT:-3001}:${ANYTHINGLLM_SERVER_PORT:-3001}"
+    env_file:
+      - ./core/anythingllm/.env
+    networks:
+      - bizzyperson-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # LibreChat Service
+  librechat:
+    build:
+      context: ./core/librechat
+      dockerfile: Dockerfile
+    container_name: bizzy-librechat
+    ports:
+      - "${LIBRECHAT_PORT:-3080}:${LIBRECHAT_PORT:-3080}"
+    depends_on:
+      - mongodb
+      - meilisearch
+      - vectordb
+      - rag_api
+    env_file:
+      - ./core/librechat/.env
+    environment:
+      - HOST=0.0.0.0
+      - MONGO_URI=mongodb://mongodb:27017/LibreChat
+      - MEILI_HOST=http://meilisearch:7700
+      - RAG_PORT=${RAG_PORT:-8000}
+      - RAG_API_URL=http://rag_api:${RAG_PORT:-8000}
+    volumes:
+      - ./core/librechat/images:/app/client/public/images
+      - ./core/librechat/uploads:/app/uploads
+      - ./core/librechat/logs:/app/api/logs
+    user: "${UID:-1000}:${GID:-1000}"
+    networks:
+      - bizzyperson-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # PostgreSQL for BizzyPerson
+  postgres:
+    image: postgres:14
+    container_name: bizzy-postgres
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-bizzy}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - bizzyperson-network
+
+  # MongoDB for LibreChat
+  mongodb:
+    image: mongo:6
+    container_name: bizzy-mongodb
+    restart: always
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - mongodb_data:/data/db
+    command: mongod --noauth
+    ports:
+      - "27017:27017"
+    networks:
+      - bizzyperson-network
+
+  # Meilisearch for LibreChat
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.3
+    container_name: bizzy-meilisearch
+    restart: always
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      - MEILI_HOST=http://meilisearch:7700
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-masterKey}
+    volumes:
+      - meili_data:/meili_data
+    networks:
+      - bizzyperson-network
+
+  # Vector Database for LibreChat RAG
+  vectordb:
+    image: ankane/pgvector:latest
+    container_name: bizzy-vectordb
+    environment:
+      POSTGRES_DB: ${LIBRECHAT_VECTORDB_DB:-mydatabase}
+      POSTGRES_USER: ${LIBRECHAT_VECTORDB_USER:-myuser}
+      POSTGRES_PASSWORD: ${LIBRECHAT_VECTORDB_PASSWORD:-mypassword}
+    restart: always
+    volumes:
+      - vectordb_data:/var/lib/postgresql/data
+    networks:
+      - bizzyperson-network
+
+  # RAG API for LibreChat
+  rag_api:
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
+    container_name: bizzy-rag-api
+    environment:
+      - DB_HOST=vectordb
+      - RAG_PORT=${RAG_PORT:-8000}
+    restart: always
+    depends_on:
+      - vectordb
+    env_file:
+      - ./core/librechat/.env
+    networks:
+      - bizzyperson-network
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  meili_data:
+  vectordb_data: 

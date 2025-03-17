@@ -1,141 +1,192 @@
 /**
- * BizzyFarmer Extension
- * Agricultural management extension for BizzyPerson
+ * Farmer Extension
+ * 
+ * This module registers the farmer extension with the BizzyPerson platform.
+ * It provides agricultural-specific functionality for farm management.
  */
 
 const { register } = require('../../core/extension-api/hooks');
+const soilTestProcessor = require('./document-processing/soil-test-processor');
 
-// Import data models
-const fieldModel = require('./data-models/field');
-const cropModel = require('./data-models/crop');
-const equipmentModel = require('./data-models/equipment');
-const soilTestModel = require('./data-models/soil-test');
-const weatherDataModel = require('./data-models/weather-data');
-const harvestRecordModel = require('./data-models/harvest-record');
-
-// Import tools
-const fieldAnalyzer = require('./tools/field-analyzer');
-const cropPlanner = require('./tools/crop-planner');
-const equipmentScheduler = require('./tools/equipment-scheduler');
-const weatherForecaster = require('./tools/weather-forecaster');
-const yieldCalculator = require('./tools/yield-calculator');
-
-// Import UI components
-const fieldMap = require('./ui-components/field-map');
-const cropCalendar = require('./ui-components/crop-calendar');
-const equipmentDashboard = require('./ui-components/equipment-dashboard');
-const weatherWidget = require('./ui-components/weather-widget');
-const yieldChart = require('./ui-components/yield-chart');
-
-// Register the extension
+/**
+ * Register the farmer extension
+ */
 register({
   name: 'bizzy-farmer',
   version: '0.1.0',
+  description: 'Agricultural extension for farm management',
   
-  // Register data models
-  dataModels: [
-    fieldModel,
-    cropModel,
-    equipmentModel,
-    soilTestModel,
-    weatherDataModel,
-    harvestRecordModel
-  ],
-  
-  // Register tools
-  tools: [
-    fieldAnalyzer,
-    cropPlanner,
-    equipmentScheduler,
-    weatherForecaster,
-    yieldCalculator
-  ],
-  
-  // Register UI components
-  uiComponents: [
-    fieldMap,
-    cropCalendar,
-    equipmentDashboard,
-    weatherWidget,
-    yieldChart
-  ],
-  
-  // Register hooks
-  hooks: {
-    // Document processor hook
-    'document-processor': async (document, context) => {
-      // Process agricultural documents
-      if (document.metadata && document.metadata.type === 'agricultural') {
-        console.log('Processing agricultural document:', document.name);
+  /**
+   * Initialize document processing
+   * 
+   * @param {object} documentProcessing - Document processing pipeline
+   */
+  initializeDocumentProcessing: (documentProcessing) => {
+    console.log('Initializing farmer document processing...');
+    
+    // Register soil test processor
+    documentProcessing.registerProcessor('soil_test', soilTestProcessor, 'farmer');
+    
+    // Register extension processor for agricultural documents
+    documentProcessing.registerExtensionProcessor('farmer', {
+      /**
+       * Process agricultural documents
+       * 
+       * @param {object} document - Processed document
+       * @param {object} metadata - Document metadata
+       * @returns {Promise<object>} Enhanced document
+       */
+      process: async (document, metadata) => {
+        console.log(`Applying farmer-specific processing to ${document.filename}`);
         
-        // Implement agricultural-specific document processing
-        // This could include extracting field data, crop information, etc.
-        
+        // Add agricultural context to document
         return {
           ...document,
-          processed: true,
-          agriculturalData: {
-            // Extract agricultural-specific data
+          agriculturalContext: {
+            // This would contain agricultural-specific context
+            // such as growing season, crop information, etc.
+            season: determineSeason(metadata.testDate || new Date()),
+            relevantCrops: determineRelevantCrops(document)
           }
         };
-      }
+      },
       
-      // Return the document unchanged if it's not agricultural
-      return document;
-    },
-    
-    // Chat tool hook
-    'chat-tool': async (query, context) => {
-      // Implement agricultural-specific chat functionality
-      if (query.toLowerCase().includes('field') || 
-          query.toLowerCase().includes('crop') || 
-          query.toLowerCase().includes('farm')) {
-        
-        console.log('Processing agricultural chat query:', query);
-        
-        // Implement agricultural-specific chat processing
-        // This could include field recommendations, crop advice, etc.
-        
+      /**
+       * Extract agricultural metadata
+       * 
+       * @param {object} document - Processed document
+       * @returns {Promise<object>} Agricultural metadata
+       */
+      extractMetadata: async (document) => {
+        // Extract agricultural-specific metadata
         return {
-          type: 'agricultural',
-          data: {
-            // Agricultural-specific response data
-          }
+          // Add agricultural-specific metadata fields
+          documentCategory: determineAgriculturalCategory(document),
+          fieldId: extractFieldId(document),
+          cropType: extractCropType(document),
+          season: determineSeason(document.metadata?.testDate || new Date())
         };
       }
-      
-      // Return null to let other extensions or the core handle the query
-      return null;
-    },
+    });
     
-    // UI component hook
-    'ui-component': (props) => {
-      // Implement agricultural-specific UI components
-      if (props.type === 'dashboard') {
-        console.log('Rendering agricultural dashboard');
-        
-        // Return agricultural dashboard components
-        return {
-          type: 'agricultural-dashboard',
-          components: [
-            fieldMap,
-            cropCalendar,
-            equipmentDashboard,
-            weatherWidget,
-            yieldChart
-          ]
-        };
+    return {
+      // Return any extension-specific document processing utilities
+      detectSoilTestType: (document) => {
+        // Logic to detect specific soil test lab/format
+        return 'standard';
       }
-      
-      // Return null to let other extensions or the core handle the UI
-      return null;
-    }
-  }
+    };
+  },
+  
+  // Other extension registration methods would go here
+  // such as registering data models, UI components, etc.
 });
 
-console.log('BizzyFarmer extension loaded successfully');
+/**
+ * Determine the agricultural season based on date
+ * 
+ * @param {Date|string} date - Date to check
+ * @returns {string} Season name
+ */
+function determineSeason(date) {
+  const d = new Date(date);
+  const month = d.getMonth();
+  
+  if (month >= 2 && month <= 4) return 'Spring';
+  if (month >= 5 && month <= 7) return 'Summer';
+  if (month >= 8 && month <= 10) return 'Fall';
+  return 'Winter';
+}
 
-module.exports = {
-  name: 'bizzy-farmer',
-  version: '0.1.0'
-}; 
+/**
+ * Determine relevant crops based on document content
+ * 
+ * @param {object} document - Processed document
+ * @returns {Array<string>} Relevant crops
+ */
+function determineRelevantCrops(document) {
+  // In a real implementation, we would analyze the document content
+  // to identify mentioned crops or crops relevant to the field
+  
+  // For now, return some common crops
+  return ['Corn', 'Soybeans', 'Wheat'];
+}
+
+/**
+ * Determine agricultural category for a document
+ * 
+ * @param {object} document - Processed document
+ * @returns {string} Agricultural category
+ */
+function determineAgriculturalCategory(document) {
+  // In a real implementation, we would analyze the document content
+  // to determine its agricultural category
+  
+  if (document.type === 'soil_test') {
+    return 'soil-management';
+  }
+  
+  // Check content for keywords
+  const content = document.content || '';
+  if (content.includes('pest') || content.includes('disease')) {
+    return 'pest-management';
+  }
+  if (content.includes('fertilizer') || content.includes('nutrient')) {
+    return 'nutrient-management';
+  }
+  if (content.includes('harvest') || content.includes('yield')) {
+    return 'harvest-management';
+  }
+  
+  return 'general';
+}
+
+/**
+ * Extract field ID from document
+ * 
+ * @param {object} document - Processed document
+ * @returns {string|null} Field ID
+ */
+function extractFieldId(document) {
+  // In a real implementation, we would use regex or NLP to extract field ID
+  
+  // For soil test documents, use the structured data
+  if (document.type === 'soil_test' && document.structuredData?.fieldId) {
+    return document.structuredData.fieldId;
+  }
+  
+  // For other documents, try to extract from content
+  const content = document.content || '';
+  const fieldMatch = content.match(/Field[:\s]+([A-Za-z0-9\s-]+)/i);
+  if (fieldMatch && fieldMatch[1]) {
+    return fieldMatch[1].trim();
+  }
+  
+  return null;
+}
+
+/**
+ * Extract crop type from document
+ * 
+ * @param {object} document - Processed document
+ * @returns {string|null} Crop type
+ */
+function extractCropType(document) {
+  // In a real implementation, we would use regex or NLP to extract crop type
+  
+  // For soil test documents, use the structured data
+  if (document.type === 'soil_test' && document.structuredData?.recommendations?.crop) {
+    return document.structuredData.recommendations.crop;
+  }
+  
+  // For other documents, try to extract from content
+  const content = document.content || '';
+  const cropMatch = content.match(/Crop[:\s]+([A-Za-z]+)/i);
+  if (cropMatch && cropMatch[1]) {
+    return cropMatch[1].trim();
+  }
+  
+  return null;
+}
+
+module.exports = {}; 

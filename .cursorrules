@@ -1,7 +1,8 @@
-# Farm Management System - Project Guidelines
+# BizzyPerson - Project Guidelines
 
 ## AnythingLLM Integration Focus
 - Develop a clear integration plan with AnythingLLM before making code changes
+- Use AnythingLLM's UI as the primary interface for the unified experience
 - Maintain compatibility with AnythingLLM's core functionality and architecture
 - Extend rather than override AnythingLLM components where possible
 - Follow AnythingLLM's existing patterns for vectorization, embedding, and retrieval
@@ -9,34 +10,34 @@
 - Test changes against the latest AnythingLLM version to ensure compatibility
 
 ## LibreChat Integration Requirements
+- Embed LibreChat capabilities within the AnythingLLM UI
 - Maintain compatibility with both AnythingLLM and LibreChat architectures
 - Document all LibreChat integration points and dependencies
 - Follow LibreChat's patterns for chat functionality and message handling
 - Implement proper error handling for LibreChat-specific features
 - Ensure seamless user experience between AnythingLLM and LibreChat components
 - Test against both systems' latest versions for compatibility
-- Document any modifications needed in LibreChat for agricultural context
+- Adapt LibreChat components to match AnythingLLM's design language
 
 ## Project Structure
-- Maintain a clear folder structure with separate directories for backend, frontend, and documentation
+- Maintain a clear folder structure with separate directories for core, extensions, and documentation
 - Use descriptive file names with a consistent naming convention
 - Keep related functionality grouped together
-- Number documentation files for easy reference (e.g., 01-System-Overview.md)
-- Create dedicated directories for farm-specific extensions
+- Number documentation files for easy reference (e.g., bp01-System-Overview.md)
+- Create dedicated directories for industry-specific extensions
 
 ## Asset Organization
 - Store UI mockups and interface designs in assets/ui/mockups/
-- Keep field-related images in assets/field-data/
+- Keep industry-specific images in appropriate extension directories
 - Maintain documentation images in assets/documentation/
 - Reference materials stored in assets/reference/
-- Equipment-related images in assets/field-data/equipment/
+- Extension-specific images in extensions/[extension-name]/assets/
 
 ## Code Standards
 - Follow separation of concerns principles in all implementations
 - Store sensitive information like API keys in environment variables, not in code
 - Maintain a requirements.txt with specific version numbers for reproducibility
-- Follow standard API patterns for the libraries being used (e.g., OpenAI, FastAPI)
-- For FastAPI apps, follow project-specific conventions for app structure
+- Follow standard API patterns for the libraries being used
 - Preserve existing functionality when making changes
 - Follow AnythingLLM's existing patterns for state management and API design
 - Implement consistent error handling across AnythingLLM and LibreChat integrations
@@ -45,7 +46,7 @@
 
 ## Component Library Standards
 - Use Shadcn/UI as the primary component library for consistent UI/UX
-- Extend Shadcn/UI components with agricultural-specific features when needed
+- Extend Shadcn/UI components with industry-specific features when needed
 - Maintain Shadcn/UI's accessibility standards across custom components
 - Follow Shadcn/UI's theming system for consistent styling
 - Implement responsive design using Shadcn/UI's built-in utilities
@@ -54,14 +55,14 @@
 - Leverage Shadcn/UI's layout components for consistent page structure
 - Ensure proper integration with both AnythingLLM and LibreChat styling patterns
 
-## Agricultural System Specifics
-- Implement specialized data models for farm-specific information
+## Extension System Specifics
+- Implement specialized data models for industry-specific information
 - Create mobile-friendly interfaces for field use
-- Optimize AI components for agricultural terminology and concepts
+- Optimize AI components for industry-specific terminology and concepts
 - Balance AI capabilities with appropriate UI components
-- Focus on practical features that deliver immediate value to farmers
-- Prioritize robust data capture methods for field conditions
-- Ensure system works reliably in rural environments with limited connectivity
+- Focus on practical features that deliver immediate value to users
+- Prioritize robust data capture methods for various use cases
+- Ensure system works reliably in environments with limited connectivity
 
 ## Documentation
 - Maintain clear, concise documentation for all components
@@ -69,7 +70,21 @@
 - Link checklist items to detailed documentation files
 - Include implementation details in specialized documentation files
 - Document API endpoints and data structures
-- Create specific documentation for AnythingLLM integration points
+- Create specific documentation for integration points
+- Follow the BP (BizzyPerson) and BF (BizzyFarmer) documentation naming conventions
+
+### Documentation Naming Convention
+- Maintain core overview documents with original numbering (bp00-bp07)
+- For specialized documents, use category prefixes with double dash:
+  * `bp-int--` for integration documents (e.g., `bp-int--knowledge-base-integration.md`)
+  * `bp-core--` for core platform documents
+  * `bp-ui--` for UI-related documents
+  * `bp-tech--` for technical documents
+  * `bp-ext--` for extension-related documents
+  * `bp-pm--` for project management documents
+- Keep BF (BizzyFarmer) files with their existing naming convention
+- Use descriptive names after the prefix for clarity
+- Avoid using numbers in the new naming convention to prevent conflicts
 
 ## Development Process
 - Start with an integration analysis to identify AnythingLLM and LibreChat touch points
@@ -83,15 +98,24 @@
 - Regularly test with both base systems during development
 - Document any conflicts or compatibility issues between the systems
 
+## Unified UI Integration
+- Use AnythingLLM's UI as the primary interface
+- Embed LibreChat's capabilities within AnythingLLM's UI
+- Maintain consistent styling and interaction patterns
+- Implement a shared state management system
+- Create a unified authentication system
+- Ensure seamless navigation between features
+- Follow the guidelines in bp08-Unified-UI-Integration.md
+
 ## Data Capture & Retrieval Excellence
-- Optimize vectorization specifically for agricultural terminology and field observations
-- Implement robust tagging systems that understand farm-specific entities (fields, crops, equipment)
-- Enhance semantic search to recognize relationships between farming concepts
-- Create specialized embedding approaches for different types of farm data (soil tests, field observations, equipment notes)
+- Optimize vectorization specifically for industry-specific terminology and observations
+- Implement robust tagging systems that understand domain-specific entities
+- Enhance semantic search to recognize relationships between industry concepts
+- Create specialized embedding approaches for different types of data
 - Implement thorough validation for all captured data to ensure quality
 - Design multi-modal capture methods (voice, image, text) optimized for field use
-- Ensure retrieval systems provide context-aware results based on seasonal and operational factors
-- Benchmark retrieval accuracy against real farm management scenarios
+- Ensure retrieval systems provide context-aware results
+- Benchmark retrieval accuracy against real-world scenarios
 
 ## Task Completion Protocol
 - When a development task is completed, provide a brief, standardized green task completion summary
@@ -100,11 +124,11 @@
 - Limit to 3-8 check mark bullet points when possible
 - Format consistently for easy scanning and reference
 - Provide a copy-paste ready version for new chat contexts
+- Update both bp00-Project-Checklist.md and bp04-Project-Checklist.md
 
-when task is completed, besides the protocols, ask only the most important next step as a question!!
+When task is completed, besides the protocols, ask only the most important next step as a question!!
 
 ## Technical Discussion Protocol
-
 - Before implementing any checklist item, conduct a focused technical discussion
 - Document key decisions and their rationale in a standardized format
 - For each component, address:
@@ -114,16 +138,23 @@ when task is completed, besides the protocols, ask only the most important next 
   * Mobile/field usability considerations
   * Testing approach and acceptance criteria
 - Create a brief decision document for each major component
-- Reference applicable agricultural use cases when making technical decisions
+- Reference applicable industry use cases when making technical decisions
 - Obtain sign-off from technical lead before beginning implementation
 - Link discussion outcomes to relevant checklist items and documentation
 
 ## Testing Protocol
 - Implement comprehensive testing for both AnythingLLM and LibreChat integrations
-- Create test cases for agricultural-specific chat scenarios
+- Create test cases for industry-specific chat scenarios
 - Test chat functionality in offline and limited connectivity scenarios
-- Verify proper handling of multi-modal farm data inputs
+- Verify proper handling of multi-modal data inputs
 - Ensure consistent behavior across both integration points
 - Document test coverage for both systems
 - Maintain separate test suites for system-specific features
 - Regular integration testing between both systems
+
+## Checklist Management
+- Always update both bp00-Project-Checklist.md and bp04-Project-Checklist.md when completing tasks
+- Follow the task ID system (BP-CORE-XX, BP-INT-XX, etc.) consistently
+- Update the progress tracking table in both checklist files
+- Create detailed documentation for completed checklist items
+- Link completed items to their implementation documentation

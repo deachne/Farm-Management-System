@@ -23,6 +23,7 @@ Key documentation files:
 - [BP04: Project Checklist](./docs/bp04-Project-Checklist.md) - Current implementation status
 - [BP05: Documentation Guidelines](./docs/bp05-Documentation-Guidelines.md) - Documentation standards
 - [BP07: Environment Variables](./docs/bp07-Environment-Variables.md) - Environment configuration
+- [BP08: Docker Compose Setup](./docs/bp08-Docker-Compose-Setup.md) - Docker Compose development environment
 - [BF01: Extension Overview](./docs/bf01-Extension-Overview.md) - BizzyFarmer extension details
 
 See the [docs README](./docs/README.md) for a complete list of documentation files.
@@ -47,6 +48,8 @@ bizzy/
 
 ## Getting Started
 
+### Standard Setup
+
 1. Clone the repository
 2. Install dependencies
 3. Configure environment variables:
@@ -56,6 +59,26 @@ bizzy/
 4. Run development server
 
 For detailed setup instructions, see [BP03: Next Steps](./docs/bp03-Next-Steps.md).
+
+### Docker Compose Setup
+
+For a containerized development environment:
+
+1. Clone the repository
+2. Configure environment variables:
+   - Copy `.env.example` to `.env` in the project root
+   - Edit the `.env` file with your configuration
+   - Run `node scripts/setup-env.js` to propagate settings to subsystems
+3. Start the Docker Compose services:
+   ```bash
+   docker-compose up -d
+   ```
+4. Access the services:
+   - BizzyPerson: http://localhost:3000
+   - AnythingLLM: http://localhost:3001
+   - LibreChat: http://localhost:3080
+
+For detailed Docker Compose setup, see [BP08: Docker Compose Setup](./docs/bp08-Docker-Compose-Setup.md).
 
 ## Environment Configuration
 
