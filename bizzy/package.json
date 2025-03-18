@@ -27,9 +27,6 @@
   },
   "homepage": "https://github.com/yourusername/bizzy-person#readme",
   "dependencies": {
-    
-  },
-  "devDependencies": {
-    
+    "class-variance-authority": "^0.7.1"
   }
-} 
+}
