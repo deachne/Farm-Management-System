@@ -152,19 +152,35 @@
   - Created Card component for content containers
   - Implemented Notification component for alerts
 - [ ] [BP-UI-16] Complete core component library
-  - Implement Dropdown Menu component
+  - Implement Dropdown Menu component ✅ Dropdown Menu component implemented with various styles and positioning options
   - Create Modal/Dialog component
   - Develop Tabs component
-  - Build Toggle, Checkbox, and Radio components
+  - Build Toggle, Checkbox, and Radio components ✅ Toggle, Checkbox, and Radio components implemented
   - Implement Tooltip and Badge components
   - Create Avatar and Progress components
-- [ ] [BP-UI-17] Implement artifact-specific components
-  - Create Document Card component
-  - Develop Knowledge Base Item component
-  - Build Artifact Gallery and Uploader components
-  - Implement Context Reference and Citation components
-  - Create Artifact Preview component
-  - Develop Search Results component
+- [x] [BP-UI-17] Implement artifact-specific components
+  - Created TextArtifact component with content expansion and farm-related detection
+  - Implemented ImageArtifact component with zoom and save capabilities
+  - Built TableArtifact component with sorting and filtering features
+  - Developed ChartArtifact component with various chart types
+  - Created CodeArtifact component with syntax highlighting
+  - Implemented ArtifactPanel and ArtifactManager for artifact organization
+  - Created ArtifactRenderer for unified rendering
+  - Built ArtifactBrowser for exploring saved artifacts
+  - Implemented comprehensive Storybook stories for all artifact components
+- [x] [BP-UI-20] Create multi-modal components
+  - Implemented MediaRenderer for displaying various media types
+  - Created MediaInput for multi-modal content upload
+  - Built farm-specific contextual media handling
+  - Implemented validation and error handling
+  - Created comprehensive Storybook stories for multi-modal components
+- [x] [BP-UI-21] Develop settings interface components
+  - Created unified settings container with navigation
+  - Implemented user settings panel with farm profile
+  - Built system configuration panel
+  - Developed AI model configuration interface
+  - Created extension management panel
+  - Implemented comprehensive demo story showcasing all settings panels
 - [ ] [BP-UI-18] Create chat-specific components
   - Implement Chat Message component
   - Build Chat Input component
