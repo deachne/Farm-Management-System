@@ -7,6 +7,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const fsPromises = fs.promises;
 
 // Import core components
 const documentProcessing = require('./shared/document-processing');
@@ -111,34 +112,88 @@ async function loadExtensions() {
     // Check if extensions directory exists
     if (!fs.existsSync(extensionsDir)) {
       console.warn('Extensions directory not found. Skipping extension loading.');
-      return;
+      return [];
     }
     
     // Get extension directories
-    const extensionDirs = fs.readdirSync(extensionsDir, { withFileTypes: true })
+    const extensionDirs = (await fsPromises.readdir(extensionsDir, { withFileTypes: true }))
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name);
     
+    console.log(`Found ${extensionDirs.length} extension directories: ${extensionDirs.join(', ')}`);
+    
+    // Sort extensions by dependency order
+    let sortedExtensionDirs;
+    try {
+      sortedExtensionDirs = await extensionApi.sortExtensionsByDependency(extensionDirs, extensionsDir);
+      console.log(`Sorted extensions by dependencies: ${sortedExtensionDirs.join(', ')}`);
+    } catch (error) {
+      console.error('Error sorting extensions by dependencies:', error);
+      console.log('Falling back to unsorted loading');
+      sortedExtensionDirs = extensionDirs;
+    }
+    
+    const loadedExtensions = [];
+    const failedExtensions = [];
+    
     // Load each extension
-    for (const extensionDir of extensionDirs) {
+    for (const extensionDir of sortedExtensionDirs) {
       try {
-        const extensionPath = path.join(extensionsDir, extensionDir);
-        const indexPath = path.join(extensionPath, 'index.js');
+        const extensionModule = await extensionApi.loadExtension(extensionDir, extensionsDir);
         
-        // Check if extension has an index.js file
-        if (fs.existsSync(indexPath)) {
-          console.log(`Loading extension: ${extensionDir}`);
+        if (extensionModule) {
+          loadedExtensions.push(extensionDir);
           
-          // Require the extension
-          require(indexPath);
+          // Get the extension name from the module
+          const extensionName = path.basename(extensionDir);
+          const extension = extensionApi.getExtension(extensionName);
+          
+          if (extension) {
+            console.log(`Initializing extension: ${extensionName}`);
+            try {
+              // Initialize the extension
+              await extensionApi.registry.initializeExtension(extensionName);
+              console.log(`Extension ${extensionName} initialized successfully`);
+            } catch (initError) {
+              console.error(`Error initializing extension ${extensionName}:`, initError);
+            }
+          }
+        } else {
+          failedExtensions.push(extensionDir);
         }
       } catch (error) {
         console.error(`Error loading extension ${extensionDir}:`, error);
+        failedExtensions.push(extensionDir);
         // Continue loading other extensions
       }
     }
     
-    console.log('Extensions loaded successfully');
+    // Print summary
+    console.log(`Extensions loaded: ${loadedExtensions.length} successful, ${failedExtensions.length} failed`);
+    if (failedExtensions.length > 0) {
+      console.log(`Failed extensions: ${failedExtensions.join(', ')}`);
+    }
+    
+    // Check for any dependency issues in loaded extensions
+    const loadingStatus = extensionApi.getExtensionLoadingStatus();
+    for (const [name, status] of Object.entries(loadingStatus)) {
+      if (status.state === 'error') {
+        console.error(`Extension ${name} failed to load: ${status.error}`);
+        
+        // Log any extensions that depend on this failed extension
+        const dependents = extensionApi.getDependentExtensions(name);
+        if (dependents.length > 0) {
+          console.warn(`Extensions that may be affected: ${dependents.join(', ')}`);
+        }
+      }
+    }
+    
+    // Set up event handlers for extensions
+    extensionApi.registry.on('extension:error', (name, error) => {
+      console.error(`Extension error: ${name} - ${error.message}`);
+    });
+    
+    return loadedExtensions;
   } catch (error) {
     console.error('Error loading extensions:', error);
     throw error;

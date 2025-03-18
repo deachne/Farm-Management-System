@@ -11,8 +11,19 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "extensions:install": "node ./scripts/extension-install.js",
+    "extensions:list": "node ./scripts/extension-list.js",
+    "extensions:test": "node ./scripts/test-extension-loading.js",
+    "extensions:test-example": "node ./scripts/test-example-extension.js",
+    "extensions:test-lifecycle": "node ./scripts/test-extension-lifecycle.js",
+    "start": "node ./core/index.js"
   },
+  "workspaces": [
+    "core/extension-api",
+    "core/shared/*",
+    "extensions/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yourusername/bizzy-person.git"
@@ -41,7 +52,8 @@
     "class-variance-authority": "^0.7.1",
     "geojson": "^0.5.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "semver": "^7.5.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.12",

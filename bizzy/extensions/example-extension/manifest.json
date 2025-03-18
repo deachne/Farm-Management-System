@@ -1,0 +1,20 @@
+{
+  "name": "example-extension",
+  "version": "1.0.0",
+  "description": "An example extension that demonstrates the extension registration system",
+  "author": "BizzyPerson Team",
+  "license": "MIT",
+  "dependencies": {
+    "core": ">=0.1.0"
+  },
+  "hooks": [
+    "document-processor",
+    "chat-tool",
+    "ui-component"
+  ],
+  "permissions": [
+    "read-documents",
+    "write-documents",
+    "use-chat"
+  ]
+} 

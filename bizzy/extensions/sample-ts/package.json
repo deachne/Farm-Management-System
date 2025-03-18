@@ -1,0 +1,13 @@
+{
+  "name": "@bizzy/extension-sample-ts",
+  "version": "0.1.0",
+  "description": "Sample TypeScript extension for BizzyPerson",
+  "main": "index.ts",
+  "private": true,
+  "dependencies": {
+    "@bizzy/extension-api": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+} 
