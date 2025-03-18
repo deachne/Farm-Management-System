@@ -15,4 +15,12 @@ export {
 
 // Services
 export { artifactStorageService } from '../../services/ArtifactStorageService';
-export type { SavedArtifact, SavedArtifactMetadata } from '../../services/ArtifactStorageService'; 
+export type { SavedArtifact, SavedArtifactMetadata } from '../../services/ArtifactStorageService';
+
+// Add RadioGroup to the exports
+export { default as RadioGroup } from './RadioGroup';
+export type { RadioGroupProps } from './RadioGroup';
+
+// Other component exports would go here
+export { default as Radio } from './Radio';
+export type { RadioProps } from './Radio'; 

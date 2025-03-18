@@ -162,7 +162,7 @@ export const NoLabel = {
 };
 
 // Radio group example
-export const RadioGroup = () => (
+export const RadioGroupExample = () => (
   <div className="space-y-6">
     <fieldset className="space-y-2">
       <legend className="text-lg font-medium mb-2">Select an option</legend>
@@ -249,7 +249,7 @@ export const RadioGroup = () => (
   </div>
 );
 
-RadioGroup.parameters = {
+RadioGroupExample.parameters = {
   docs: {
     description: {
       story: 'Examples of radio button groups in different configurations.',

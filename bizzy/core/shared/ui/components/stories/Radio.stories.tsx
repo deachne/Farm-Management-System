@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Radio } from '../Radio';
+import { RadioGroup } from '../RadioGroup';
 
 const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
@@ -52,6 +53,10 @@ const meta: Meta<typeof Radio> = {
     name: {
       control: 'text',
       description: 'Name attribute for the radio input',
+    },
+    value: {
+      control: 'text',
+      description: 'Value attribute for the radio input',
     },
   },
   parameters: {
@@ -166,105 +171,105 @@ export const NoLabel: Story = {
   },
 };
 
-// Radio group example
-export const RadioGroup: Story = {
+/**
+ * Example using the RadioGroup component
+ */
+export const WithRadioGroup: Story = {
   render: () => (
     <div className="space-y-6">
-      <fieldset className="space-y-2">
-        <legend className="text-lg font-medium mb-2">Select an option</legend>
+      <RadioGroup 
+        name="radio-group-1" 
+        label="Select an option"
+      >
         <Radio 
           label="Option 1" 
-          name="radio-group-1" 
-          id="option-1" 
+          value="option1" 
           defaultChecked 
         />
         <Radio 
           label="Option 2" 
-          name="radio-group-1" 
-          id="option-2" 
+          value="option2" 
         />
         <Radio 
           label="Option 3" 
-          name="radio-group-1" 
-          id="option-3" 
+          value="option3" 
         />
-      </fieldset>
+      </RadioGroup>
       
-      <fieldset className="space-y-2">
-        <legend className="text-lg font-medium mb-2">With helper text</legend>
+      <RadioGroup 
+        name="radio-group-2" 
+        label="With helper text"
+        helperText="Choose the plan that best fits your needs"
+      >
         <Radio 
           label="Basic plan" 
-          name="radio-group-2" 
-          id="plan-1" 
+          value="basic" 
           helperText="Best for personal use" 
           defaultChecked 
         />
         <Radio 
           label="Professional plan" 
-          name="radio-group-2" 
-          id="plan-2" 
+          value="pro" 
           helperText="Best for small teams" 
         />
         <Radio 
           label="Enterprise plan" 
-          name="radio-group-2" 
-          id="plan-3" 
+          value="enterprise" 
           helperText="Best for large organizations" 
         />
-      </fieldset>
+      </RadioGroup>
       
-      <fieldset className="space-y-2">
-        <legend className="text-lg font-medium mb-2">Different sizes</legend>
+      <RadioGroup 
+        name="radio-group-3" 
+        label="Different sizes"
+      >
         <Radio 
           label="Small radio" 
-          name="radio-group-3" 
-          id="size-1" 
+          value="sm" 
           size="sm" 
         />
         <Radio 
           label="Medium radio" 
-          name="radio-group-3" 
-          id="size-2" 
+          value="md" 
           size="md" 
           defaultChecked 
         />
         <Radio 
           label="Large radio" 
-          name="radio-group-3" 
-          id="size-3" 
+          value="lg" 
           size="lg" 
         />
-      </fieldset>
+      </RadioGroup>
       
-      <fieldset className="space-y-2">
-        <legend className="text-lg font-medium mb-2">Disabled state</legend>
+      <RadioGroup 
+        name="radio-group-4" 
+        label="Disabled state"
+      >
         <Radio 
           label="Disabled radio" 
-          name="radio-group-4" 
-          id="disabled-1" 
+          value="disabled-1" 
           disabled 
         />
         <Radio 
           label="Disabled checked radio" 
-          name="radio-group-4" 
-          id="disabled-2" 
+          value="disabled-2" 
           disabled 
           defaultChecked 
         />
-      </fieldset>
+      </RadioGroup>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Examples of radio button groups in different configurations.',
+        story: 'Example using the RadioGroup component to organize radio buttons.',
       },
     },
   },
 };
 
 // Controlled Radio example
-export const ControlledRadio: Story = {
+export const ControlledRadioGroup: Story = {
   render: () => {
     const [selected, setSelected] = React.useState('option1');
     
@@ -272,29 +277,25 @@ export const ControlledRadio: Story = {
       <div className="space-y-4">
         <div>
           <p className="mb-2">Selected option: <strong>{selected}</strong></p>
-          <div className="space-y-2">
+          <RadioGroup 
+            name="controlled-radio" 
+            label="Controlled Radio Group"
+            value={selected}
+            onChange={setSelected}
+          >
             <Radio 
               label="Option 1" 
-              name="controlled-radio" 
-              id="controlled-1" 
-              checked={selected === 'option1'}
-              onChange={() => setSelected('option1')}
+              value="option1" 
             />
             <Radio 
               label="Option 2" 
-              name="controlled-radio" 
-              id="controlled-2" 
-              checked={selected === 'option2'}
-              onChange={() => setSelected('option2')}
+              value="option2" 
             />
             <Radio 
               label="Option 3" 
-              name="controlled-radio" 
-              id="controlled-3" 
-              checked={selected === 'option3'}
-              onChange={() => setSelected('option3')}
+              value="option3" 
             />
-          </div>
+          </RadioGroup>
         </div>
         <div className="flex gap-2">
           <button 
@@ -322,7 +323,7 @@ export const ControlledRadio: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'An example of controlled radio buttons using React state.',
+        story: 'An example of controlled radio buttons using React state with RadioGroup.',
       },
     },
   },

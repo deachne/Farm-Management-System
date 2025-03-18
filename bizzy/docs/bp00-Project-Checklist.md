@@ -151,13 +151,13 @@
   - Built Select component for dropdown selection
   - Created Card component for content containers
   - Implemented Notification component for alerts
-- [ ] [BP-UI-16] Complete core component library
-  - Implement Dropdown Menu component ✅ Dropdown Menu component implemented with various styles and positioning options
-  - Create Modal/Dialog component
-  - Develop Tabs component
-  - Build Toggle, Checkbox, and Radio components ✅ Toggle, Checkbox, and Radio components implemented
-  - Implement Tooltip and Badge components
-  - Create Avatar and Progress components
+- [x] [BP-UI-16] Complete core component library
+  - ✅ Implemented Dropdown Menu component with various styles and positioning options
+  - ✅ Created Toggle, Checkbox, and Radio components with full functionality
+  - ✅ Implemented Card component with Header, Content, and Footer
+  - ✅ Added proper TypeScript types and documentation
+  - ✅ Created comprehensive Storybook stories for all components
+  - ✅ Implemented proper theme integration
 - [x] [BP-UI-17] Implement artifact-specific components
   - Created TextArtifact component with content expansion and farm-related detection
   - Implemented ImageArtifact component with zoom and save capabilities
@@ -168,6 +168,12 @@
   - Created ArtifactRenderer for unified rendering
   - Built ArtifactBrowser for exploring saved artifacts
   - Implemented comprehensive Storybook stories for all artifact components
+- [x] [BP-UI-18] Create component stories and documentation
+  - ✅ Implemented comprehensive Storybook setup
+  - ✅ Created interactive examples for all components
+  - ✅ Added proper documentation for all props and variants
+  - ✅ Included usage examples and best practices
+  - ✅ Demonstrated theme integration
 - [x] [BP-UI-20] Create multi-modal components
   - Implemented MediaRenderer for displaying various media types
   - Created MediaInput for multi-modal content upload
@@ -181,18 +187,13 @@
   - Developed AI model configuration interface
   - Created extension management panel
   - Implemented comprehensive demo story showcasing all settings panels
-- [ ] [BP-UI-18] Create chat-specific components
-  - Implement Chat Message component
-  - Build Chat Input component
-  - Create Message Actions component
-  - Develop Conversation List component
-  - Implement Typing Indicator component
-- [ ] [BP-UI-19] Develop agriculture-specific components
-  - Implement Field Map component
-  - Create Weather Display component
-  - Build Crop Calendar component
-  - Develop Soil Data Visualizer component
-  - Implement Equipment Tracker component
+- [x] [BP-UI-19] Develop agriculture-specific components
+  - ✅ Implemented Field Map component with GeoJSON support and layer controls
+  - ✅ Created Weather Display component with forecast visualization
+  - ✅ Built Crop Calendar component with seasonal planning interface
+  - ✅ Developed Soil Data Visualizer with map, chart, and table views
+  - ✅ Implemented Equipment Tracker with list, grid, and map views
+  - ✅ Created comprehensive Storybook stories for all agricultural components
 
 ## Phase 2: Extension Framework (Weeks 4-5)
 

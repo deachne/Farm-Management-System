@@ -3,10 +3,11 @@ import { User, Settings, LogOut } from 'lucide-react';
 
 // Import individual components to showcase
 import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel } from '../../bizzy/core/shared/ui/components/DropdownMenu';
-import { Radio, RadioGroup } from '../../bizzy/core/shared/ui/components/Radio';
+import { Radio } from '../../bizzy/core/shared/ui/components/Radio';
+import { RadioGroup } from '../../bizzy/core/shared/ui/components/RadioGroup';
 import { Toggle } from '../../bizzy/core/shared/ui/components/Toggle';
 import { Checkbox } from '../../bizzy/core/shared/ui/components/Checkbox';
-import { Card } from '../../bizzy/core/shared/ui/components/Card';
+import { Card, CardHeader, CardContent, CardFooter } from '../../bizzy/core/shared/ui/components/Card';
 import { Button } from '../../bizzy/core/shared/ui/components/Button';
 import { Input } from '../../bizzy/core/shared/ui/components/Input';
 
@@ -72,15 +73,15 @@ export const CheckboxExample = {
 export const CardExample = {
   render: () => (
     <Card>
-      <Card.Header>
+      <CardHeader>
         <h3 className="text-lg font-medium">Card Title</h3>
-      </Card.Header>
-      <Card.Content>
+      </CardHeader>
+      <CardContent>
         <p>This is a sample card content.</p>
-      </Card.Content>
-      <Card.Footer>
+      </CardContent>
+      <CardFooter>
         <Button variant="primary" size="sm">Action</Button>
-      </Card.Footer>
+      </CardFooter>
     </Card>
   ),
   component: Card

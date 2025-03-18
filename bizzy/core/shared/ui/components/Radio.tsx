@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../utils/cn';
+import { useRadioGroup } from './RadioGroup';
 
 /**
  * Radio variants
@@ -69,6 +70,11 @@ export interface RadioProps
    * Additional class names to apply to the radio container
    */
   containerClassName?: string;
+  
+  /**
+   * Value of the radio button (used with RadioGroup)
+   */
+  value?: string;
 }
 
 /**
@@ -84,9 +90,47 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     orientation,
     containerClassName,
     id,
+    name: propName,
+    checked: propChecked,
+    onChange: propOnChange,
+    value,
     ...props 
   }, ref) => {
     const radioId = id || React.useId();
+    
+    // Try to use RadioGroup context if available
+    let name = propName;
+    let checked = propChecked;
+    let onChange = propOnChange;
+    
+    try {
+      const radioGroup = useRadioGroup();
+      
+      // If within a RadioGroup, use its context
+      if (radioGroup) {
+        name = name || radioGroup.name;
+        
+        // Only override checked state if we have a value and group has a value
+        if (value !== undefined && radioGroup.value !== undefined) {
+          checked = value === radioGroup.value;
+        }
+        
+        const originalOnChange = onChange;
+        
+        // Handle both the RadioGroup onChange and local onChange
+        onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          if (originalOnChange) {
+            originalOnChange(e);
+          }
+          
+          if (radioGroup.onChange && value) {
+            radioGroup.onChange(value);
+          }
+        };
+      }
+    } catch (error) {
+      // Not within a RadioGroup, use props as is
+    }
     
     return (
       <div className={cn(
@@ -99,6 +143,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
               type="radio"
               id={radioId}
               ref={ref}
+              name={name}
+              checked={checked}
+              onChange={onChange}
+              value={value}
               className={cn(
                 radioVariants({ size }),
                 className
@@ -149,4 +197,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
 
 Radio.displayName = "Radio";
 
-export default Radio; 
+export default Radio;
+
+// Re-export RadioGroup to fix the import error
+export { default as RadioGroup } from './RadioGroup'; 

@@ -7,7 +7,11 @@
     "init": "bash ./scripts/init-project.sh",
     "update-anythingllm": "bash ./scripts/update-anythingllm.sh",
     "update-librechat": "bash ./scripts/update-librechat.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,30 @@
   },
   "homepage": "https://github.com/yourusername/bizzy-person#readme",
   "dependencies": {
-    "class-variance-authority": "^0.7.1"
+    "@radix-ui/react-avatar": "^1.1.3",
+    "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-progress": "^1.1.2",
+    "@radix-ui/react-tabs": "^1.1.3",
+    "@radix-ui/react-tooltip": "^1.1.8",
+    "@types/geojson": "^7946.0.14",
+    "@types/react": "^18.2.55",
+    "class-variance-authority": "^0.7.1",
+    "geojson": "^0.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.12",
+    "@storybook/addon-interactions": "^7.6.12",
+    "@storybook/addon-links": "^7.6.12",
+    "@storybook/blocks": "^7.6.12",
+    "@storybook/react": "^7.6.12",
+    "@storybook/react-vite": "^7.6.12",
+    "@storybook/testing-library": "^0.2.2",
+    "@types/node": "^20.11.16",
+    "@vitejs/plugin-react": "^4.2.1",
+    "storybook": "^7.6.12",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   }
 }
