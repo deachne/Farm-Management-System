@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BizzyPerson Admin Dashboard Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles for the demo */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .demo-header {
+      background-color: #1E40AF;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .demo-footer {
+      background-color: #F3F4F6;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #6B7280;
+    }
+    
+    .demo-description {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #374151;
+    }
+    
+    .demo-subheader {
+      border-bottom: 1px solid #E5E7EB;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #1F2937;
+    }
+    
+    .component-preview {
+      border: 1px solid #E5E7EB;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+    
+    .component-preview-header {
+      background-color: #F9FAFB;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #E5E7EB;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .component-preview-body {
+      background-color: white;
+    }
+    
+    .component-code {
+      background-color: #1F2937;
+      color: #F9FAFB;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: monospace;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    
+    .theme-toggle {
+      background-color: #4B5563;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+    
+    .dark-mode {
+      background-color: #111827;
+      color: white;
+    }
+    
+    .dark-mode .demo-description {
+      color: #E5E7EB;
+    }
+    
+    .dark-mode .demo-subheader {
+      color: #F3F4F6;
+      border-color: #4B5563;
+    }
+    
+    .dark-mode .component-preview {
+      border-color: #4B5563;
+    }
+    
+    .dark-mode .component-preview-header {
+      background-color: #374151;
+      border-color: #4B5563;
+      color: #F3F4F6;
+    }
+    
+    .dark-mode .component-preview-body {
+      background-color: #1F2937;
+    }
+  </style>
+</head>
+<body>
+  <header class="demo-header">
+    <h1 class="text-2xl font-bold">BizzyPerson Admin Dashboard</h1>
+    <p class="mt-2">Interactive Component Preview</p>
+  </header>
+  
+  <main>
+    <div class="demo-description">
+      <h2 class="text-xl font-semibold demo-subheader">About the Dashboard</h2>
+      <p class="mb-4">
+        This is an interactive preview of the BizzyPerson Admin Dashboard component. The dashboard provides a comprehensive 
+        overview of system status, user statistics, and extension management capabilities.
+      </p>
+      <p class="mb-4">
+        Key features of the dashboard include:
+      </p>
+      <ul class="list-disc list-inside mb-4 space-y-1">
+        <li>System statistics with trend indicators</li>
+        <li>Extension management with permission controls</li>
+        <li>System status panel with service health monitoring</li>
+        <li>Responsive layout that works on mobile devices</li>
+        <li>Dark mode support</li>
+      </ul>
+      <p>
+        Interact with the dashboard below to see its features. Click on buttons to see actions logged at the bottom right.
+      </p>
+    </div>
+    
+    <div class="component-preview max-w-7xl mx-auto">
+      <div class="component-preview-header">
+        <span>Dashboard Preview</span>
+        <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+      </div>
+      <div class="component-preview-body">
+        <!-- Dashboard Component Preview would be rendered here in a real app -->
+        <div id="dashboard-root" class="h-screen">
+          <!-- This is a placeholder. In a real app, we would render the React component here -->
+          <div class="flex justify-center items-center h-full">
+            <p class="text-lg text-gray-500">
+              To view the actual Dashboard component, please run the React application.
+              <br>
+              <code class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">npm start</code>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="demo-description">
+      <h2 class="text-xl font-semibold demo-subheader">Usage</h2>
+      <p class="mb-4">
+        To use the Dashboard component in your React application:
+      </p>
+      <pre class="component-code">
+import { Dashboard } from 'bizzy/core/admin/components';
+
+// Create your dashboard props
+const dashboardProps = {
+  stats: [...],
+  extensions: [...],
+  systemStatus: {...},
+  // Event handlers
+  onAddExtension: () => {...},
+  // Other handlers...
+};
+
+// Render the component
+function AdminPage() {
+  return <Dashboard {...dashboardProps} />;
+}
+      </pre>
+    </div>
+  </main>
+  
+  <footer class="demo-footer">
+    <p>&copy; 2023 BizzyPerson. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    // Simple dark mode toggle
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html> 
