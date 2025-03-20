@@ -1,6 +1,6 @@
 import React from 'react';
 import UnifiedNavigation from './UnifiedNavigation';
-import { useNavigationIntegration } from '../hooks/useNavigationIntegration';
+import { useNavigationIntegration } from '../hooks';
 
 /**
  * Navigation wrapper component that integrates AnythingLLM and LibreChat navigation
