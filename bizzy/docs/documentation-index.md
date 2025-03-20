@@ -84,6 +84,7 @@ This document serves as a central index for all BizzyPerson project documentatio
 | [bp-ui--librechat-adaptation.md](bp-ui--librechat-adaptation.md) | LibreChat UI adaptation | Component mapping, styling changes |
 | [bp-ui--unified-design-system-summary.md](bp-ui--unified-design-system-summary.md) | Summary of design system implementation | Implementation status, design decisions |
 | [bp-ui--component-library-status.md](bp-ui--component-library-status.md) | Status of component library | Component inventory, implementation status |
+| [bp-ui--extension-management.md](bp-ui--extension-management.md) | Extension Management UI | Extension listing, configuration, installation, permissions |
 
 ## Extension Framework
 
@@ -122,6 +123,7 @@ This document serves as a central index for all BizzyPerson project documentatio
 | [vite-development-guide.md](vite-development-guide.md) | Vite development environment guide | Development server, configuration, troubleshooting |
 | [system-integration-guide.md](system-integration-guide.md) | System integration reference | Integration patterns, component organization |
 | [bp05-Documentation-Guidelines.md](bp05-Documentation-Guidelines.md) | Documentation standards | File naming, content structure, formatting |
+| [bp-ui--implementation-guide.md](bp-ui--implementation-guide.md) | UI component implementation guide | Component development process, integration steps, troubleshooting |
 
 ## Task Completion Reports
 
@@ -132,6 +134,7 @@ This document serves as a central index for all BizzyPerson project documentatio
 | [bp-task--extension-configuration-system-completion.md](bp-task--extension-configuration-system-completion.md) | Extension configuration system completion | Configuration UI, persistence mechanism |
 | [bp-task--extension-permissions-completion.md](bp-task--extension-permissions-completion.md) | Extension permissions implementation report | Security model, permission enforcement |
 | [bp-task--example-extension-completion.md](bp-task--example-extension-completion.md) | Example extension implementation report | Extension structure, API usage example |
+| [bp-task--extension-management-completion.md](bp-task--extension-management-completion.md) | Extension Management UI implementation report | UI components, filtering, configuration, permissions |
 
 ## Legacy Documentation
 

@@ -216,6 +216,64 @@ npm run dev
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 
+## Resolving Import Errors in BizzyPerson
+
+### Common Vite Import Error Patterns
+
+When working on BizzyPerson components, you may encounter import errors like these:
+
+```
+[plugin:vite:import-analysis] Failed to resolve import "../../../../shared/ui/components/Button" from "core/admin/components/SystemMonitoring/index.tsx". Does the file exist?
+```
+
+These errors typically indicate incorrect path resolution. Here are specific strategies to resolve them:
+
+### 1. Component Path Resolution
+
+Vite uses the project root as its base for path resolution. The correct import depth depends on your component's location:
+
+| Component Location | Import for Shared UI | Example |
+| --- | --- | --- |
+| `bizzy/core/admin/components/X` | `../../../shared/ui/components/Y` | `import { Button } from '../../../shared/ui/components/Button';` |
+| `bizzy/core/admin/demo/X` | `../../../shared/ui/components/Y` | `import { Input } from '../../../shared/ui/components/Input';` |
+
+### 2. Using Aliases
+
+BizzyPerson is configured with path aliases in `vite.config.ts`. Prefer using these for cleaner imports:
+
+```tsx
+// Instead of relative paths
+import { Button } from '../../../shared/ui/components/Button';
+
+// You can use aliases (if configured)
+import { Button } from '@/core/shared/ui/components/Button';
+```
+
+### 3. Checking Component Exports
+
+For components that are giving import errors:
+
+1. Check if the component is exported correctly from its source file
+2. Verify if it should be imported from an index file or directly
+3. Check if it uses a default or named export
+
+### 4. Post-Error Recovery
+
+If you encounter an import error:
+
+1. Fix the import path in your component
+2. Save the file
+3. If Vite's HMR doesn't recover automatically, try:
+   - Restarting the dev server (`npm run dev`)
+   - Clearing Vite's cache: `rm -rf node_modules/.vite`
+
+### 5. Checking Component Import Examples
+
+For quick reference, look at existing components that import similar dependencies. For example:
+
+- Check `Dashboard/index.tsx` to see how it imports shared UI components
+- Check existing demo files to see correct import patterns
+
 ---
 
 This guide should be referenced whenever encountering issues with the Vite development environment or when setting up new development workflows. 

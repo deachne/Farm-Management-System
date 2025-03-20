@@ -37,13 +37,15 @@ export interface DashboardProps {
     services: ServiceStatus[];
     incidents?: Incident[];
   };
-  onAddExtension?: () => void;
-  onManagePermissions?: () => void;
+  onAddExtension?: (name?: string) => void;
+  onManagePermissions?: (name?: string) => void;
   onUpdateAll?: () => void;
-  onConfigureExtension?: (extensionName: string) => void;
-  onActivateExtension?: (extensionName: string) => void;
-  onDeactivateExtension?: (extensionName: string) => void;
+  onConfigureExtension?: (name: string) => void;
+  onActivateExtension?: (name: string) => void;
+  onDeactivateExtension?: (name: string) => void;
   onSearch?: (query: string) => void;
   onToggleSystemStatus?: () => void;
   onNavigateToUsers?: () => void;
+  onNavigateToExtensions?: () => void;
+  onNavigateToSystem?: () => void;
 }

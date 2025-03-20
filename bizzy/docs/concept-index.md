@@ -35,6 +35,7 @@ This document maps key project concepts to their documentation, implementation s
 | **Navigation System** | Seamless navigation between features | [bp-ui--seamless-navigation.md](bp-ui--seamless-navigation.md) | ✅ Implemented | `bizzy/core/shared/ui/components/Navigation/` |
 | **Dashboard UI** | Admin dashboard interface | [dev-reference.md](dev-reference.md) | ✅ Implemented | `bizzy/core/admin/components/Dashboard/` |
 | **User Management UI** | User management interface | [dev-reference.md](dev-reference.md) | ✅ Implemented | `bizzy/core/admin/components/UserManagement/` |
+| **Extension Management UI** | Extension management interface | [bp-ui--extension-management.md](bp-ui--extension-management.md) | ✅ Implemented | `bizzy/core/admin/components/ExtensionManagement/` |
 | **Settings Interface** | Unified settings interface | [bp-ui--unified-settings-interface.md](bp-ui--unified-settings-interface.md) | ⏳ In Progress | `bizzy/core/admin/components/Settings/` |
 
 ## BizzyFarmer Concepts

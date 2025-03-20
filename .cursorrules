@@ -1,5 +1,13 @@
 # BizzyPerson - Project Guidelines
 
+## AI Assistant Instructions
+- When starting a new chat, first review these key documents:
+  * `bizzy/docs/documentation-index.md` - Comprehensive documentation overview
+  * `bizzy/docs/concept-index.md` - Key project concepts and implementation status
+- Use these indexes to gain context about the project before responding
+- Refer to these indexes when answering questions about project status or implementation details
+- When discussing specific components, check their documentation and implementation status in these indexes
+
 ## GitHub Repository Information
 - This project's main repository is located at: https://github.com/deachne/Farm-Management-System.git
 - All changes should be committed and pushed to this repository only

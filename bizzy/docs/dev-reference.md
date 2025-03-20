@@ -251,6 +251,62 @@ const DashboardDemo: React.FC = () => {
 - Vite: https://vitejs.dev/guide/
 - React: https://reactjs.org/docs/getting-started.html
 
+## Component Imports and Common Issues
+
+### Import Path Patterns
+
+When adding new components, pay special attention to import paths. Use the following patterns:
+
+1. **For components inside `admin/components` importing shared UI components:**
+   ```tsx
+   // Correct way to import shared UI components from admin components
+   import { Button } from '../../../shared/ui/components/Button';
+   import { Card, CardContent } from '../../../shared/ui/components/Card';
+   ```
+
+2. **For demo components importing shared UI components:**
+   ```tsx
+   // Correct way to import shared UI components from demo components
+   import { Button } from '../../../shared/ui/components/Button';
+   import { Input } from '../../../shared/ui/components/Input';
+   ```
+
+3. **For admin components importing other admin components:**
+   ```tsx
+   // Correct way to import other admin components
+   import { Dashboard } from '../Dashboard';
+   import { SystemStatus } from '../SystemStatus';
+   ```
+
+### Common Import Issues
+
+1. **Wrong path depth**: If you see errors like "Failed to resolve import", check your path depth. The most common issue is having too many or too few parent directory references (`../`).
+
+2. **Import from index vs direct import**: Some components are exported from index files, while others need direct imports from their component files. Check existing imports for similar components.
+
+3. **Default vs Named exports**: Some components use default exports, while others use named exports. Check the component source to determine the correct import style.
+
+4. **Component dependencies**: New components often need to import several shared UI components. Make sure all needed components are properly imported.
+
+### Troubleshooting Import Errors
+
+When encountering import errors:
+
+1. Check the exact path of the component you're trying to import using `ls -la` in the terminal.
+2. Look at how similar components import the same dependency in other files.
+3. Update the import path with the correct relative path from your component's location.
+4. If the component is exported from an index file, you may need to add it to that file.
+
+**Example Issue Resolution**:
+
+```tsx
+// ERROR: Failed to resolve import "../../../../../shared/ui/components/Button"
+import { Button } from '../../../../../shared/ui/components/Button';
+
+// FIXED: Correct import path with proper depth
+import { Button } from '../../../shared/ui/components/Button';
+```
+
 ---
 
 This document should be referenced before beginning work on any new component or page to ensure consistency and adherence to established patterns. 

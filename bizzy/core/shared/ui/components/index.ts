@@ -23,4 +23,12 @@ export type { RadioGroupProps } from './RadioGroup';
 
 // Other component exports would go here
 export { default as Radio } from './Radio';
-export type { RadioProps } from './Radio'; 
+export type { RadioProps } from './Radio';
+
+// Export Button and other UI components if they're not already exported
+export { default as Button } from './Button';
+export { default as Card, CardContent, CardHeader, CardFooter } from './Card';
+export { default as Input } from './Input';
+export { Progress } from './Progress';
+export { Badge } from './Badge';
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './Tabs'; 
