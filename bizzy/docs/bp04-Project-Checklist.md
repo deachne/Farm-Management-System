@@ -256,4 +256,32 @@
 | 2 | Core Documentation | In Progress | 40% |
 | 3 | BizzyFarmer Extension | In Progress | 44% |
 | 4 | Testing and Deployment | In Progress | 17% |
-| 4 | Documentation | In Progress | 60% | 
+| 4 | Documentation | In Progress | 60% |
+
+## New Sections
+
+- [ ] [BP-TOOL-05] Implement tool result handling
+
+### PKM Core Foundation
+- [ ] [BP-PKM-01] Implement comprehensive document ingestion system
+- [ ] [BP-PKM-02] Develop OCR system for paper notes and documents
+- [ ] [BP-PKM-03] Create AI-driven content organization system
+- [ ] [BP-PKM-04] Implement advanced vectorization system
+- [ ] [BP-PKM-05] Build comprehensive Notes System
+- [ ] [BP-PKM-06] Implement AI-driven note organization
+- [ ] [BP-PKM-07] Create unified search and retrieval system
+
+### Enhanced LibreChat Integration
+- [ ] [BP-LIBRE-01] Implement advanced artifact system
+- [ ] [BP-LIBRE-02] Develop template-based visualization system
+- [ ] [BP-LIBRE-03] Implement code interpretation capabilities
+- [ ] [BP-LIBRE-04] Create enhanced MCP plugin system
+- [ ] [BP-LIBRE-05] Build multi-modal conversation system
+
+### Extension Module Architecture
+- [ ] [BP-EXT-MOD-01] Create extension module registry system
+- [ ] [BP-EXT-MOD-02] Implement module template system
+- [ ] [BP-EXT-MOD-03] Develop module UI integration framework
+- [ ] [BP-EXT-MOD-04] Create automatic AI integration hooks
+- [ ] [BP-EXT-MOD-05] Implement cross-module data flow
+- [ ] [BP-EXT-MOD-06] Build example modules for BizzyFarmer 

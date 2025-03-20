@@ -79,6 +79,77 @@
   - Implemented embedding model for vectorization
   - Created search interface for document retrieval
 
+### PKM Core Foundation
+- [ ] [BP-PKM-01] Implement comprehensive document ingestion system
+  - Support for research papers, articles, and academic content
+  - YouTube video and transcript processing
+  - Web page archiving and processing
+  - Email integration for capturing communications
+- [ ] [BP-PKM-02] Develop OCR system for paper notes and documents
+  - Mobile capture of physical documents
+  - Handwriting recognition capabilities
+  - Processing of scanned documents
+  - Quality enhancement for poor quality scans
+- [ ] [BP-PKM-03] Create AI-driven content organization system
+  - Automatic categorization of content
+  - Entity extraction and relationship mapping
+  - Key concept identification
+  - Topic clustering and visualization
+- [ ] [BP-PKM-04] Implement advanced vectorization system
+  - Specialized embedding models for different content types
+  - Multi-modal embedding strategies
+  - Chunking optimization for knowledge retrieval
+  - Cross-referencing between related content
+- [ ] [BP-PKM-05] Build comprehensive Notes System
+  - Basic note creation and editing interface
+  - Mobile-friendly capture mechanism
+  - Voice input and transcription
+  - Image capture and annotation
+  - Location tagging for field observations
+  - AI-driven tagging and categorization
+  - Cross-module integration (notes to tasks, field observations)
+  - Search and filter capabilities
+  - Export and sharing options
+- [ ] [BP-PKM-06] Implement AI-driven note organization
+  - Automatic tagging and classification
+  - Entity and action item extraction
+  - Topic modeling and relationship mapping
+  - Chronological and category-based organization
+  - Smart collections based on content patterns
+- [ ] [BP-PKM-07] Create unified search and retrieval system
+  - Natural language search capabilities
+  - Multi-modal search (text, image, voice)
+  - Context-aware result ranking
+  - Faceted search and filtering
+  - Search analytics and improvement
+
+### Enhanced LibreChat Integration
+- [ ] [BP-LIBRE-01] Implement advanced artifact system
+  - Rich data visualization components
+  - Interactive elements within artifacts
+  - Multi-modal artifact support (text, image, code, charts)
+  - Persistent artifact storage and retrieval
+- [ ] [BP-LIBRE-02] Develop template-based visualization system
+  - Template registry for different data types
+  - Dynamic template selection based on content
+  - User customization of templates
+  - Domain-specific visualization templates
+- [ ] [BP-LIBRE-03] Implement code interpretation capabilities
+  - Secure code execution environment
+  - Support for multiple programming languages
+  - Result visualization and export
+  - Error handling and debugging assistance
+- [ ] [BP-LIBRE-04] Create enhanced MCP plugin system
+  - Plugin management interface
+  - Secure plugin execution
+  - Plugin marketplace integration
+  - Custom plugin development tools
+- [ ] [BP-LIBRE-05] Build multi-modal conversation system
+  - Voice input and output
+  - Image analysis and generation
+  - Document analysis and summarization
+  - Multi-modal context management
+
 ### Tool Framework Foundation
 - [ ] [BP-TOOL-01] Implement tool registry system
 - [ ] [BP-TOOL-02] Create basic tool execution framework
@@ -201,6 +272,39 @@
   - ✅ Developed Soil Data Visualizer with map, chart, and table views
   - ✅ Implemented Equipment Tracker with list, grid, and map views
   - ✅ Created comprehensive Storybook stories for all agricultural components
+
+### Extension Module Architecture
+- [ ] [BP-EXT-MOD-01] Create extension module registry system
+  - Module definition and metadata structure
+  - Module discovery and registration process
+  - Module dependency management
+  - Module versioning and updates
+- [ ] [BP-EXT-MOD-02] Implement module template system
+  - Standard module structure and boilerplate
+  - Template generation tools
+  - Configuration schema definition
+  - Integration point documentation
+- [ ] [BP-EXT-MOD-03] Develop module UI integration framework
+  - Module UI component registry
+  - Navigation integration for modules
+  - Consistent styling and theming
+  - Mobile-responsive module templates
+- [ ] [BP-EXT-MOD-04] Create automatic AI integration hooks
+  - Vector store integration for module data
+  - Module-specific prompt templates
+  - Custom artifact handlers for module data
+  - Module data enrichment pipelines
+- [ ] [BP-EXT-MOD-05] Implement cross-module data flow
+  - Module data sharing architecture
+  - Event system for cross-module communication
+  - Data synchronization between modules
+  - Conflict resolution strategies
+- [ ] [BP-EXT-MOD-06] Build example modules for BizzyFarmer
+  - Quotes module with price tracking
+  - Crop planning module with rotation tracking
+  - Soil test module with analysis visualization
+  - Analytics module with data integration
+  - Journal module for observations and notes
 
 ## Phase 2: Extension Framework (Weeks 4-5)
 

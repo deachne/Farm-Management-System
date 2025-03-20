@@ -1,6 +1,51 @@
 # BizzyPerson Documentation
 
-This directory contains documentation for the BizzyPerson project, including system architecture, component descriptions, and development guidelines.
+## Documentation Index
+
+👉 **[Documentation Index](documentation-index.md)** - Start here for a comprehensive overview of all project documentation. This index organizes documents by category, provides brief descriptions, and highlights key concepts.
+
+👉 **[Concept Index](concept-index.md)** - Track key project concepts, their documentation, implementation status, and code locations. Helps ensure important ideas aren't overlooked.
+
+## Documentation Categories
+
+The documentation is organized into the following categories:
+
+| Category | Description |
+|----------|-------------|
+| Project Overview | High-level descriptions of the system architecture and goals |
+| Project Status | Checklists and progress tracking |
+| Architecture | System design, deployment, and infrastructure |
+| Integration | Documentation on integrating AnythingLLM and LibreChat |
+| UI | User interface design, components, and implementation |
+| Extensions | Extension framework and BizzyFarmer extension |
+| Technical | Technical details on implementation approaches |
+| Developer Guides | Practical guides for developers working on the project |
+
+## Key Documents
+
+| Document | Description |
+|----------|-------------|
+| [bp-System-Overview.md](bp-System-Overview.md) | System architecture and component overview |
+| [bp00-Project-Checklist.md](bp00-Project-Checklist.md) | Master project checklist with detailed phases and timelines |
+| [bp04-Project-Checklist.md](bp04-Project-Checklist.md) | Simplified implementation status checklist |
+| [dev-reference.md](dev-reference.md) | Developer reference guide |
+| [vite-development-guide.md](vite-development-guide.md) | Vite development environment guide |
+| [system-integration-guide.md](system-integration-guide.md) | System integration reference |
+| [bf01-Extension-Overview.md](bf01-Extension-Overview.md) | BizzyFarmer extension overview |
+
+## Getting Started
+
+For new contributors, we recommend this reading order:
+
+1. [bp-System-Overview.md](bp-System-Overview.md) - Understand the system architecture
+2. [bp04-Project-Checklist.md](bp04-Project-Checklist.md) - See the current implementation status
+3. [bf01-Extension-Overview.md](bf01-Extension-Overview.md) - Learn about the BizzyFarmer extension
+
+## Developer Resources
+
+1. [dev-reference.md](dev-reference.md) - Developer reference guide
+2. [vite-development-guide.md](vite-development-guide.md) - Vite development environment guide
+3. [system-integration-guide.md](system-integration-guide.md) - System integration reference
 
 ## Documentation Structure
 

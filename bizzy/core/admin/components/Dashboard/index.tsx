@@ -37,6 +37,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   onDeactivateExtension,
   onSearch,
   onToggleSystemStatus,
+  onNavigateToUsers,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSystemStatus, setShowSystemStatus] = useState(false);
@@ -132,7 +133,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                   <LayoutDashboard className="h-5 w-5 mr-3 text-blue-300" />
                   Dashboard
                 </li>
-                <li className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center">
+                <li 
+                  className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
+                  onClick={onNavigateToUsers}
+                >
                   <Users className="h-5 w-5 mr-3 text-pink-300" />
                   Users
                 </li>

@@ -45,4 +45,5 @@ export interface DashboardProps {
   onDeactivateExtension?: (extensionName: string) => void;
   onSearch?: (query: string) => void;
   onToggleSystemStatus?: () => void;
+  onNavigateToUsers?: () => void;
 }
