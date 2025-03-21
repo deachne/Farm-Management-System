@@ -114,6 +114,12 @@ This document serves as a central index for all BizzyPerson project documentatio
 | [bp-Efficient-RAG-Architecture.md](bp-Efficient-RAG-Architecture.md) | Efficient RAG architecture | Performance optimization, resource utilization |
 | [bp-tech--component-library-decisions.md](bp-tech--component-library-decisions.md) | Component library technical decisions | Library selection, implementation strategy |
 | [bp-tech--linting-issues-tracker.md](bp-tech--linting-issues-tracker.md) | Tracking of linting issues | Code quality, formatting standards |
+| [bp-tech--system-architecture.md](./bp-tech--system-architecture.md) | Overview of the entire system architecture | System components, architecture overview |
+| [bp-tech--api-reference.md](./bp-tech--api-reference.md) | API reference documentation | API endpoints, usage guidelines |
+| [bp-tech--data-model.md](./bp-tech--data-model.md) | Data model documentation | Data structures, relationships, usage |
+| [bp-tech--security.md](./bp-tech--security.md) | Security considerations and implementation | Security measures, access control |
+| [bp-tech--performance.md](./bp-tech--performance.md) | Performance considerations and optimization strategies | Performance metrics, optimization techniques |
+| [bp-tech--lovable-integration.md](./bp-tech--lovable-integration.md) | Approach to integrating Lovable-generated components | Component integration, usage guidelines |
 
 ## Developer Guides
 
