@@ -1,12 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import { Bold, Italic, Underline, List } from 'lucide-react';
 import { TextareaAutosize } from './TextareaAutosize';
+import { TagsInput } from './TagsInput';
+import { AITagSuggestions } from './AITagSuggestions';
 
 interface NoteEditorProps {
   content: string;
   onChange: (content: string) => void;
   isEditing: boolean;
   placeholder?: string;
+  note: any;
+  onAddTag: (tag: string) => void;
+  onRemoveTag: (tag: string) => void;
+  availableTags: string[];
 }
 
 /**
@@ -18,6 +24,10 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({
   onChange,
   isEditing,
   placeholder = 'Write your note here...',
+  note,
+  onAddTag,
+  onRemoveTag,
+  availableTags,
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -174,6 +184,27 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({
           className="flex-1 resize-none border-none focus:outline-none text-gray-700 text-base p-1 bg-gray-50 rounded-md"
           minRows={10}
         />
+
+        {/* Tag selection */}
+        <div className="mt-4">
+          <label className="block text-sm font-medium text-gray-700">Tags</label>
+          <div className="mt-1">
+            <TagsInput
+              tags={note.userTags}
+              onAddTag={onAddTag}
+              onRemoveTag={onRemoveTag}
+              availableTags={availableTags}
+            />
+          </div>
+          
+          {/* Add AI Tag Suggestions */}
+          <AITagSuggestions
+            content={note.content}
+            existingTags={[...note.userTags, ...note.aiTags]}
+            onAddTag={onAddTag}
+            isEnabled={true}
+          />
+        </div>
       </div>
     );
   }

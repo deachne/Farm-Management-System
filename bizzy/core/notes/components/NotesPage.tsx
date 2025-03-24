@@ -4,7 +4,9 @@ import { Note, NoteSortOrder } from '../types';
 import { NoteList } from './NoteList';
 import { TagSelector } from './TagSelector';
 import { NoteEditor } from './NoteEditor';
-import { FileText, Plus } from 'lucide-react';
+import { FileText, Plus, Calendar, Tag as TagIcon } from 'lucide-react';
+import { CalendarView } from './CalendarView';
+import { TagView } from './TagView';
 
 /**
  * Main Notes page component
@@ -247,149 +249,108 @@ export const NotesPage: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-1 h-screen bg-white overflow-hidden">
-      <div className="flex-1 flex flex-col">
-        {/* Top Bar */}
-        <div className="flex items-center justify-between p-4 border-b">
-          <div className="flex items-center">
-            <div className="bg-blue-600 text-white text-xl font-semibold px-4 py-2 rounded-md">
-              BizzyPerson
+    <div className="notes-page h-full flex flex-col">
+      <div className="bg-white border-b p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Notes</h1>
+          <div className="flex items-center space-x-2">
+            <div className="flex border rounded overflow-hidden">
+              <button 
+                className={`px-3 py-1 flex items-center ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white'}`}
+                onClick={() => handleViewModeChange('list')}
+              >
+                <FileText size={16} className="mr-1" />
+                List
+              </button>
+              <button 
+                className={`px-3 py-1 flex items-center ${viewMode === 'calendar' ? 'bg-blue-600 text-white' : 'bg-white'}`}
+                onClick={() => handleViewModeChange('calendar')}
+              >
+                <Calendar size={16} className="mr-1" />
+                Calendar
+              </button>
+              <button 
+                className={`px-3 py-1 flex items-center ${viewMode === 'tags' ? 'bg-blue-600 text-white' : 'bg-white'}`}
+                onClick={() => handleViewModeChange('tags')}
+              >
+                <TagIcon size={16} className="mr-1" />
+                Tags
+              </button>
             </div>
-            <div className="text-xl font-semibold ml-2 text-gray-700">Notes</div>
+            <button
+              onClick={handleCreateNote}
+              className="px-3 py-1 bg-blue-600 text-white rounded flex items-center"
+            >
+              <Plus size={16} className="mr-1" />
+              New Note
+            </button>
           </div>
         </div>
         
-        <div className="flex flex-1 overflow-hidden">
-          {/* Notes List Panel */}
-          <div className="w-1/3 border-r flex flex-col">
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-4">Notes</h2>
-              
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-full grid grid-cols-3 bg-gray-100 p-1 rounded-md">
-                  <button 
-                    className={`py-2 px-4 rounded text-sm font-medium transition-colors ${viewMode === 'list' ? 'bg-white shadow text-primary' : 'text-gray-500'}`}
-                    onClick={() => handleViewModeChange('list')}
-                  >
-                    List
-                  </button>
-                  <button 
-                    className={`py-2 px-4 rounded text-sm font-medium transition-colors ${viewMode === 'calendar' ? 'bg-white shadow text-primary' : 'text-gray-500'}`}
-                    onClick={() => handleViewModeChange('calendar')}
-                  >
-                    Calendar
-                  </button>
-                  <button 
-                    className={`py-2 px-4 rounded text-sm font-medium transition-colors ${viewMode === 'tags' ? 'bg-white shadow text-primary' : 'text-gray-500'}`}
-                    onClick={() => handleViewModeChange('tags')}
-                  >
-                    Tags
-                  </button>
-                </div>
-                
-                <button 
-                  onClick={handleCreateNote}
-                  className="ml-2 p-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center"
-                >
-                  <Plus className="h-5 w-5" />
-                </button>
-              </div>
-              
-              <div className="mb-4">
-                <div className="relative">
-                  <input
-                    type="search"
-                    placeholder="Search notes..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                    value={searchText}
-                    onChange={handleSearchChange}
-                  />
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-              </div>
-              
-              <div className="flex justify-between items-center mb-2">
-                <select
-                  className="p-2 border rounded-md text-sm w-full"
-                  value={sort}
-                  onChange={(e) => updateSort(e.target.value as NoteSortOrder)}
-                >
-                  <option value={NoteSortOrder.CreatedNewest}>Newest first</option>
-                  <option value={NoteSortOrder.CreatedOldest}>Oldest first</option>
-                  <option value={NoteSortOrder.UpdatedNewest}>Recently updated</option>
-                  <option value={NoteSortOrder.UpdatedOldest}>Least recently updated</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto">
-              <NoteList 
-                notes={notes} 
-                onSelectNote={handleSelectNote}
+        {/* Only show search in list view */}
+        {viewMode === 'list' && (
+          <div className="mt-4">
+            <input
+              type="text"
+              placeholder="Search notes..."
+              value={searchText}
+              onChange={handleSearchChange}
+              className="w-full px-3 py-2 border rounded"
+            />
+          </div>
+        )}
+      </div>
+      
+      <div className="flex-1 overflow-hidden flex">
+        {viewMode === 'list' && (
+          <div className="flex-1 flex overflow-hidden">
+            {/* List view */}
+            <div className="w-1/3 overflow-y-auto border-r p-4">
+              <NoteList
+                notes={notes}
                 selectedNoteId={selectedNoteId}
+                onSelectNote={handleSelectNote}
               />
             </div>
-          </div>
-          
-          {/* Note Content Panel */}
-          <div className="w-2/3 flex flex-col">
-            {selectedNote ? (
-              <div className="h-full flex flex-col">
-                {/* Note Editor Header */}
-                <div className="p-4 border-b border-gray-200 flex flex-col">
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex flex-col">
-                      <h2 className="text-xl font-semibold text-gray-900">
-                        {selectedNote.noteType || 'General'}
-                      </h2>
-                      
-                      {isEditing ? (
-                        <div className="mt-2 flex items-center">
-                          <label className="text-sm text-gray-600 mr-2">Date:</label>
-                          <input 
-                            type="date" 
-                            className="border border-gray-300 rounded px-2 py-1 text-sm"
-                            value={formatDateForInput(selectedNote.dateStamp)}
-                            onChange={handleDateChange}
-                          />
-                        </div>
-                      ) : (
-                        <div className="text-sm text-gray-500 mt-1">
-                          Date: {selectedNote.dateStamp ? 
-                            new Date(selectedNote.dateStamp).toLocaleDateString(undefined, {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
-                            }) : 
-                            new Date(selectedNote.createdAt).toLocaleDateString(undefined, {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
-                            })}
-                        </div>
-                      )}
+            
+            {/* Note editor area */}
+            <div className="w-2/3 overflow-y-auto p-4">
+              {selectedNote ? (
+                <div className="h-full flex flex-col">
+                  <div className="mb-4 flex justify-between items-center">
+                    <div>
+                      <select
+                        value={selectedNote.noteType || 'General'}
+                        onChange={(e) => handleNoteTypeChange(e.target.value as Note['noteType'])}
+                        disabled={!isEditing}
+                        className="block px-3 py-1 border rounded bg-white"
+                      >
+                        <option value="General">General</option>
+                        <option value="Field Observation">Field Observation</option>
+                        <option value="Price Quote">Price Quote</option>
+                        <option value="Equipment Maintenance">Equipment Maintenance</option>
+                        <option value="Meeting Notes">Meeting Notes</option>
+                        <option value="Soil Test Results">Soil Test Results</option>
+                        <option value="Weather Report">Weather Report</option>
+                        <option value="Market Update">Market Update</option>
+                      </select>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {selectedNote.dateStamp ? new Date(selectedNote.dateStamp).toLocaleDateString() : 
+                          new Date(selectedNote.createdAt).toLocaleDateString()}
+                      </div>
                     </div>
-                    
                     <div className="flex space-x-2">
                       {isEditing ? (
                         <>
                           <button
                             onClick={handleSaveCurrentNote}
-                            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded"
+                            className="px-3 py-1 bg-green-600 text-white rounded"
                           >
                             Save
                           </button>
                           <button
                             onClick={handleCancelEdit}
-                            className="px-3 py-1 border border-gray-300 hover:bg-gray-100 text-gray-700 text-sm rounded"
+                            className="px-3 py-1 bg-gray-200 text-gray-800 rounded"
                           >
                             Cancel
                           </button>
@@ -398,13 +359,13 @@ export const NotesPage: React.FC = () => {
                         <>
                           <button
                             onClick={() => setIsEditing(true)}
-                            className="px-3 py-1 border border-gray-300 hover:bg-gray-100 text-gray-700 text-sm rounded"
+                            className="px-3 py-1 bg-blue-600 text-white rounded"
                           >
                             Edit
                           </button>
                           <button
                             onClick={handleDeleteNote}
-                            className="px-3 py-1 border border-red-300 hover:bg-red-50 text-red-600 hover:text-red-700 text-sm rounded"
+                            className="px-3 py-1 bg-red-600 text-white rounded"
                           >
                             Delete
                           </button>
@@ -413,85 +374,38 @@ export const NotesPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="text-sm text-gray-500 mb-2">
-                    Last updated {formatDate(selectedNote.updatedAt)} at {formatTime(selectedNote.updatedAt)}
-                  </div>
-                  
-                  {/* Tags Section - Moved to the top */}
-                  <div className="flex items-center mt-2">
-                    <div className="flex flex-wrap gap-2 items-center">
-                      <span className="text-sm font-medium text-gray-700">Tags:</span>
-                      {selectedNote.userTags.map(tag => (
-                        <span
-                          key={tag}
-                          className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200"
-                        >
-                          {tag}
-                          {isEditing && (
-                            <button
-                              onClick={() => handleRemoveTag(tag)}
-                              className="ml-1 text-blue-400 hover:text-blue-600"
-                            >
-                              ×
-                            </button>
-                          )}
-                        </span>
-                      ))}
-                      {isEditing && (
-                        <div className="flex items-center">
-                          <input
-                            type="text"
-                            value={newTagText}
-                            onChange={e => setNewTagText(e.target.value)}
-                            onKeyDown={handleTagKeyDown}
-                            placeholder="Add tag..."
-                            className="border border-gray-300 rounded px-2 py-1 text-sm"
-                          />
-                          <button
-                            onClick={handleAddTagButton}
-                            className="ml-2 text-blue-600 hover:text-blue-800 text-sm"
-                          >
-                            Add
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                  <div className="flex-1 overflow-y-auto border rounded p-4">
+                    <NoteEditor
+                      content={currentContent}
+                      onChange={handleContentChange}
+                      isEditing={isEditing}
+                      note={selectedNote}
+                      onAddTag={handleAddTag}
+                      onRemoveTag={handleRemoveTag}
+                      availableTags={availableTags}
+                    />
                   </div>
                 </div>
-            
-                {/* Note Editor Content */}
-                <div className="flex-grow overflow-auto p-4">
-                  <NoteEditor
-                    content={currentContent}
-                    onChange={handleContentChange}
-                    isEditing={isEditing}
-                    placeholder="Write your note here..."
-                  />
+              ) : (
+                <div className="h-full flex items-center justify-center text-gray-400">
+                  Select a note or create a new one
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                <FileText className="h-16 w-16 text-gray-300 mb-4" />
-                <p className="text-xl font-medium mb-2">No note selected</p>
-                <p className="text-sm text-gray-400 mb-6">Select a note or create a new one</p>
-                <button 
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
-                  onClick={handleCreateNote}
-                >
-                  Create Note
-                </button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        )}
         
-        {/* Action Log Footer */}
-        <div className="border-t p-2 text-sm text-gray-500 flex justify-end">
-          <div>
-            <span className="font-medium">Action Log:</span> 
-            <span className="ml-2">{selectedNote ? `Viewing: ${selectedNote.noteType || 'Note'}` : 'Navigated to Notes'}</span>
+        {viewMode === 'calendar' && (
+          <div className="flex-1 overflow-y-auto">
+            <CalendarView onSelectNote={handleSelectNote} />
           </div>
-        </div>
+        )}
+        
+        {viewMode === 'tags' && (
+          <div className="flex-1 overflow-y-auto">
+            <TagView onSelectNote={handleSelectNote} />
+          </div>
+        )}
       </div>
     </div>
   );
