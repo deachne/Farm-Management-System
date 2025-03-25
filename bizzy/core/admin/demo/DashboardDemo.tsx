@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dashboard } from '../components';
 import { UserManagement } from '../components';
 import { ExtensionManagement } from '../components';
@@ -11,11 +11,15 @@ import {
   Tractor, 
   BanknoteIcon, 
   Factory,
-  Package
+  Package,
+  MessageSquare
 } from 'lucide-react';
 import SystemMonitoringDemo from './SystemMonitoringDemo';
 import Sidebar from '../components/Sidebar';
 import ConfigurationManagementDemo from './ConfigurationManagementDemo';
+import { NotesPage } from '../../notes';
+// Import the components but not the full ChatPage
+import { ChatPage } from '../../chat/components/ChatPage';
 
 /**
  * Dashboard Demonstration Component
@@ -43,6 +47,7 @@ import ConfigurationManagementDemo from './ConfigurationManagementDemo';
 interface ExtendedDashboardProps extends DashboardProps {
   onNavigateToSystem?: () => void;
   onNavigateToConfig?: () => void;
+  onNavigateToNotes?: () => void;
 }
 
 // Create an interface for the extension objects being passed to callbacks
@@ -53,8 +58,16 @@ interface ExtensionItem {
 
 const DashboardDemo: React.FC = () => {
   // Using state to track the current view
-  const [view, setView] = useState<'dashboard' | 'users' | 'extensions' | 'system' | 'config'>('dashboard');
+  const [view, setView] = useState<'dashboard' | 'users' | 'extensions' | 'system' | 'config' | 'notes' | 'chat'>('dashboard');
+  // Add a "last view" state to track where we came from
+  const [previousView, setPreviousView] = useState<string>('dashboard');
   const [actionLog, setActionLog] = useState<string[]>([]);
+  
+  // Add effect to monitor view changes
+  useEffect(() => {
+    console.log('View changed to:', view, 'from', previousView);
+    // This will help us debug if the state is actually changing
+  }, [view, previousView]);
   
   // Log actions for demonstration
   const logAction = (action: string) => {
@@ -62,10 +75,44 @@ const DashboardDemo: React.FC = () => {
     setActionLog(prev => [action, ...prev].slice(0, 5));
   };
 
+  // Modified navigation function that updates both current and previous view
+  const navigateTo = (newView: 'dashboard' | 'users' | 'extensions' | 'system' | 'config' | 'notes' | 'chat') => {
+    setPreviousView(view); // Store the current view before changing
+    setView(newView);      // Change to new view
+    logAction(`Navigated to ${newView}`);
+  };
+
   // Add the onNavigateToConfig handler function
   const onNavigateToConfig = () => {
-    setView('config');
-    logAction('Navigated to Configuration Management');
+    navigateTo('config');
+  };
+
+  // Add the onNavigateToNotes handler function
+  const onNavigateToNotes = () => {
+    navigateTo('notes');
+  };
+
+  // Special handler for chat that handles the Dashboard → Chat case
+  const onNavigateToChat = () => {
+    // If coming from dashboard, we need to "reset" something
+    if (view === 'dashboard') {
+      // This is the key fix - force a reset of any state that might be causing the issue
+      console.log('Navigating from dashboard to chat via multi-step reset...');
+      
+      // First set to notes (which seems to work as an intermediary)
+      setPreviousView('notes');
+      setView('notes');
+      
+      // Then quickly transition to chat after a brief delay
+      setTimeout(() => {
+        setPreviousView('notes');
+        setView('chat');
+        logAction('Navigated to chat via reset sequence');
+      }, 50);
+    } else {
+      // Normal navigation for other cases
+      navigateTo('chat');
+    }
   };
 
   // Dashboard props with action logging
@@ -101,107 +148,101 @@ const DashboardDemo: React.FC = () => {
         },
       },
       {
-        icon: <HardDrive className="text-gray-500" />,
-        value: '68%',
+        icon: <HardDrive className="text-amber-500" />,
+        value: '1.2 TB',
         label: 'Storage Used',
         change: {
-          value: 5,
+          value: 0.2,
           type: 'increase',
           period: 'this month',
         },
       },
-    ] as StatItem[],
+    ],
+    recentActivity: [
+      {
+        user: 'John Doe',
+        action: 'Added new document: Farm_Report_2023.pdf',
+        timestamp: '2 hours ago',
+      },
+      {
+        user: 'Jane Smith',
+        action: 'Created workspace: "Crop Planning 2024"',
+        timestamp: '3 hours ago',
+      },
+      {
+        user: 'Bob Johnson',
+        action: 'Updated vector database settings',
+        timestamp: '5 hours ago',
+      },
+      {
+        user: 'Alice Williams',
+        action: 'Invited 3 new users',
+        timestamp: '1 day ago',
+      },
+      {
+        user: 'System',
+        action: 'Scheduled maintenance completed',
+        timestamp: '1 day ago',
+      },
+    ],
     extensions: [
       {
-        name: 'Farm Management',
-        icon: <Tractor className="text-green-500" />,
-        version: '1.2.3',
-        status: 'active',
-        permissions: {
-          documentAccess: true,
-          searchAccess: true,
-          networkAccess: true,
-        },
-        resources: {
-          users: 12,
-          storage: '2.3 GB',
-        },
+        id: '1',
+        name: 'BizzyFarmer',
+        description: 'Agricultural management extension with field mapping, crop planning, and yield tracking',
+        author: 'BizzyPerson Team',
+        version: '1.2.0',
+        icon: <Tractor className="text-green-600" />,
+        isActive: true,
       },
       {
-        name: 'BizzyBank',
-        icon: <BanknoteIcon className="text-yellow-500" />,
-        version: '0.9.1',
-        status: 'active',
-        permissions: {
-          documentAccess: true,
-          searchAccess: false,
-          networkAccess: false,
-        },
-        resources: {
-          users: 5,
-          storage: '1.2 GB',
-        },
+        id: '2',
+        name: 'Inventory Manager',
+        description: 'Track inventory, manage suppliers, and automate ordering processes',
+        author: 'Supply Chain Solutions',
+        version: '0.9.5',
+        icon: <BanknoteIcon className="text-blue-600" />,
+        isActive: true,
       },
       {
-        name: 'Manufacturing',
-        icon: <Factory className="text-gray-500" />,
-        version: '1.0.0',
-        status: 'inactive',
-        permissions: {
-          documentAccess: true,
-          searchAccess: true,
-          networkAccess: true,
-        },
+        id: '3',
+        name: 'Manufacturing Suite',
+        description: 'Production scheduling, quality control, and equipment maintenance tools',
+        author: 'Industrial Systems Inc.',
+        version: '1.0.1',
+        icon: <Factory className="text-gray-600" />,
+        isActive: true,
       },
-    ] as Extension[],
-    systemStatus: {
-      isOperational: true,
-      lastUpdated: '2 minutes ago',
-      services: [
-        { name: 'API Server', status: 'healthy' },
-        { name: 'Database', status: 'healthy' },
-        { name: 'Vector Store', status: 'healthy' },
-        { name: 'Chat Server', status: 'healthy' },
-        { name: 'File Storage', status: 'warning' },
-      ],
-      incidents: [
-        {
-          id: '1',
-          title: 'File Storage Capacity Warning',
-          timestamp: '2023-04-15 14:32',
-          status: 'ongoing',
-          severity: 'medium',
-          description: 'File storage approaching capacity limits. Consider upgrading storage or removing unused files.',
-        }
-      ],
+      {
+        id: '4',
+        name: 'Sales Pipeline',
+        description: 'Customer relationship management and sales forecasting',
+        author: 'Growth Tools LLC',
+        version: '2.1.3',
+        icon: <HardDrive className="text-purple-600" />,
+        isActive: false,
+      },
+    ],
+    onExtensionClick: (extension: Extension) => {
+      logAction(`Clicked on extension: ${extension.name}`);
     },
-    // Action handlers with logs
-    onAddExtension: () => logAction('Extension added'),
-    onManagePermissions: (name?: string) => logAction(`Managing permissions for: ${name || 'all'}`),
-    onUpdateAll: () => logAction('Updating all extensions'),
-    onConfigureExtension: (name: string) => logAction(`Configuring extension: ${name}`),
-    onActivateExtension: (name: string) => logAction(`Activated extension: ${name}`),
-    onDeactivateExtension: (name: string) => logAction(`Deactivated extension: ${name}`),
-    onSearch: (query: string) => logAction(`Searching for: ${query}`),
-    onToggleSystemStatus: () => logAction('Toggled system status'),
-    // Navigation handler to User Management
+    onExtensionToggle: (extension: Extension, newState: boolean) => {
+      logAction(`${newState ? 'Activated' : 'Deactivated'} extension: ${extension.name}`);
+    },
     onNavigateToUsers: () => {
-      setView('users');
-      logAction('Navigated to User Management');
+      navigateTo('users');
     },
-    // Navigation handler to Extensions Management
     onNavigateToExtensions: () => {
-      setView('extensions');
-      logAction('Navigated to Extension Management');
+      navigateTo('extensions');
     },
-    // Add a new navigation handler for system monitoring
     onNavigateToSystem: () => {
-      setView('system');
-      logAction('Navigated to System Monitoring');
+      navigateTo('system');
     },
     onNavigateToConfig: () => {
-      setView('config');
-      logAction('Navigated to Configuration Management');
+      navigateTo('config');
+    },
+    onNavigateToNotes: () => {
+      navigateTo('notes');
     }
   };
 
@@ -231,7 +272,12 @@ const DashboardDemo: React.FC = () => {
               </button>
               <div className="overflow-hidden transition-all duration-200 max-h-96">
                 <ul className="space-y-1.5 mt-2.5">
-                  <li className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center">
+                  <li 
+                    className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
+                    onClick={() => {
+                      setView('notes');
+                    }}
+                  >
                     <FileText className="h-5 w-5 mr-3 text-green-300" />
                     Notes
                   </li>
@@ -252,7 +298,6 @@ const DashboardDemo: React.FC = () => {
                     className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
                     onClick={() => {
                       setView('dashboard');
-                      logAction('Navigated to Dashboard');
                     }}
                   >
                     <div className="h-5 w-5 mr-3 text-blue-300" />
@@ -268,7 +313,6 @@ const DashboardDemo: React.FC = () => {
                     className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
                     onClick={() => {
                       setView('extensions');
-                      logAction('Navigated to Extensions');
                     }}
                   >
                     <Package className="h-5 w-5 mr-3 text-orange-300" />
@@ -330,7 +374,12 @@ const DashboardDemo: React.FC = () => {
               </button>
               <div className="overflow-hidden transition-all duration-200 max-h-96">
                 <ul className="space-y-1.5 mt-2.5">
-                  <li className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center">
+                  <li 
+                    className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
+                    onClick={() => {
+                      setView('notes');
+                    }}
+                  >
                     <FileText className="h-5 w-5 mr-3 text-green-300" />
                     Notes
                   </li>
@@ -351,7 +400,6 @@ const DashboardDemo: React.FC = () => {
                     className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
                     onClick={() => {
                       setView('dashboard');
-                      logAction('Navigated to Dashboard');
                     }}
                   >
                     <div className="h-5 w-5 mr-3 text-blue-300" />
@@ -361,7 +409,6 @@ const DashboardDemo: React.FC = () => {
                     className="px-3 py-2.5 rounded hover:bg-blue-500 cursor-pointer text-base flex items-center"
                     onClick={() => {
                       setView('users');
-                      logAction('Navigated to User Management');
                     }}
                   >
                     <Users className="h-5 w-5 mr-3 text-pink-300" />
@@ -390,6 +437,10 @@ const DashboardDemo: React.FC = () => {
                   <span className="bg-white text-blue-600 px-3 py-1 rounded-md mr-3">BizzyPerson</span>
                   Extension Management
                 </h1>
+                {/* Search box and other header elements */}
+                <div className="flex items-center space-x-3">
+                  {/* ... */}
+                </div>
               </div>
             </div>
           </div>
@@ -398,16 +449,32 @@ const DashboardDemo: React.FC = () => {
           <div className="py-7 px-6 sm:px-8 lg:px-10">
             <ExtensionManagement 
               extensions={dashboardProps.extensions as any[]}
-              onAddExtension={() => logAction('Extension added')}
-              onActivateExtension={(ext: ExtensionItem) => logAction(`Activated extension: ${ext.name}`)}
-              onDeactivateExtension={(ext: ExtensionItem) => logAction(`Deactivated extension: ${ext.name}`)}
-              onUninstallExtension={(ext: ExtensionItem) => logAction(`Uninstalled extension: ${ext.name}`)}
-              onUpdateExtension={(ext: ExtensionItem) => logAction(`Updated extension: ${ext.name}`)}
-              onConfigureExtension={(ext: ExtensionItem) => logAction(`Configured extension: ${ext.name}`)}
-              onManagePermissions={(ext: ExtensionItem) => logAction(`Managed permissions for: ${ext.name}`)}
+              onExtensionConfigClick={(name) => logAction(`Configuring extension: ${name}`)}
+              onExtensionToggle={(name, isActive) => logAction(`Set extension ${name} to ${isActive ? 'active' : 'inactive'}`)}
+              onExtensionAddClick={() => logAction('Clicked Add Extension')}
             />
           </div>
         </div>
+      </div>
+    );
+  };
+
+  // Notes Management component with proper styling for consistency
+  const renderNotesManagement = () => {
+    console.log('Rendering notes management');
+    return (
+      <NotesPage />
+    );
+  };
+
+  // Chat Management component with proper styling for consistency
+  const renderChatManagement = () => {
+    console.log('Rendering chat management from external component');
+    
+    // Return our external component instead of the inline one
+    return (
+      <div className="w-full h-full">
+        <ChatPage />
       </div>
     );
   };
@@ -417,11 +484,13 @@ const DashboardDemo: React.FC = () => {
       {/* Shared sidebar for all views */}
       <Sidebar 
         currentView={view}
-        onNavigateToDashboard={() => setView('dashboard')}
-        onNavigateToUsers={() => setView('users')}
-        onNavigateToExtensions={() => setView('extensions')}
-        onNavigateToSystem={() => setView('system')}
-        onNavigateToConfig={() => setView('config')}
+        onNavigateToDashboard={() => navigateTo('dashboard')}
+        onNavigateToUsers={() => navigateTo('users')}
+        onNavigateToExtensions={() => navigateTo('extensions')}
+        onNavigateToSystem={() => navigateTo('system')}
+        onNavigateToConfig={() => navigateTo('config')}
+        onNavigateToNotes={() => navigateTo('notes')}
+        onNavigateToChat={onNavigateToChat}
       />
       
       {/* Main content area */}
@@ -440,8 +509,8 @@ const DashboardDemo: React.FC = () => {
           </div>
         )}
         
-        {/* Render the appropriate content based on view state */}
-        {view === 'dashboard' ? (
+        {/* Render the appropriate content based on view state - with more explicit conditionals */}
+        {view === 'dashboard' && (
           <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
@@ -463,7 +532,9 @@ const DashboardDemo: React.FC = () => {
               <Dashboard {...dashboardProps} />
             </div>
           </div>
-        ) : view === 'users' ? (
+        )}
+        
+        {view === 'users' && (
           <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
@@ -485,7 +556,9 @@ const DashboardDemo: React.FC = () => {
               {renderUserManagement()}
             </div>
           </div>
-        ) : view === 'extensions' ? (
+        )}
+        
+        {view === 'extensions' && (
           <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
@@ -507,7 +580,9 @@ const DashboardDemo: React.FC = () => {
               {renderExtensionsManagement()}
             </div>
           </div>
-        ) : view === 'system' ? (
+        )}
+        
+        {view === 'system' && (
           <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
@@ -527,13 +602,15 @@ const DashboardDemo: React.FC = () => {
             {/* System Monitoring content */}
             <div className="py-7 px-6 sm:px-8 lg:px-10">
               <SystemMonitoringDemo 
-                onNavigateToDashboard={() => setView('dashboard')}
-                onNavigateToUsers={() => setView('users')}
-                onNavigateToExtensions={() => setView('extensions')}
+                onNavigateToDashboard={() => navigateTo('dashboard')}
+                onNavigateToUsers={() => navigateTo('users')}
+                onNavigateToExtensions={() => navigateTo('extensions')}
               />
             </div>
           </div>
-        ) : view === 'config' ? (
+        )}
+        
+        {view === 'config' && (
           <div>
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
@@ -555,7 +632,55 @@ const DashboardDemo: React.FC = () => {
               <ConfigurationManagementDemo />
             </div>
           </div>
-        ) : null}
+        )}
+        
+        {view === 'notes' && (
+          <div>
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
+              <div className="px-6 sm:px-8 lg:px-10">
+                <div className="flex items-center justify-between py-5">
+                  <h1 className="text-2xl font-bold text-white flex items-center">
+                    <span className="bg-white text-blue-600 px-3 py-1 rounded-md mr-3">BizzyPerson</span>
+                    Notes
+                  </h1>
+                  {/* Search box and other header elements */}
+                  <div className="flex items-center space-x-3">
+                    {/* ... */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Notes content */}
+            <div className="py-7 px-6 sm:px-8 lg:px-10">
+              {renderNotesManagement()}
+            </div>
+          </div>
+        )}
+        
+        {view === 'chat' && (
+          <div key={`chat-view-container-${Date.now()}`}>
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg">
+              <div className="px-6 sm:px-8 lg:px-10">
+                <div className="flex items-center justify-between py-5">
+                  <h1 className="text-2xl font-bold text-white flex items-center">
+                    <span className="bg-white text-blue-600 px-3 py-1 rounded-md mr-3">BizzyPerson</span>
+                    Chat
+                  </h1>
+                  {/* Search box and other header elements */}
+                  <div className="flex items-center space-x-3">
+                    {/* ... */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Chat content */}
+            <div className="py-7 px-6 sm:px-8 lg:px-10">
+              {renderChatManagement()}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
