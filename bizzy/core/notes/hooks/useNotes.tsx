@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Note, NoteFilter, NoteSortOrder } from '../types';
-import { NotesService } from '../services/notesService';
+import { NotesService, TagRecommender } from '../services';
 
 /**
  * Hook for managing notes
@@ -13,6 +13,7 @@ export const useNotes = () => {
   const [sort, setSort] = useState<NoteSortOrder>(NoteSortOrder.CreatedNewest);
   
   const notesService = new NotesService();
+  const tagRecommender = new TagRecommender();
   
   /**
    * Fetch notes based on current filter and sort order
@@ -171,6 +172,115 @@ export const useNotes = () => {
     return notesService.getAITags();
   }, []);
   
+  /**
+   * Update a tag across all notes
+   */
+  const updateTag = useCallback((oldTag: string, newTag: string) => {
+    setError(null);
+    
+    try {
+      notesService.updateTag(oldTag, newTag);
+      // Refresh notes to reflect changes
+      fetchNotes();
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An error occurred while updating the tag'));
+      return false;
+    }
+  }, [fetchNotes]);
+  
+  /**
+   * Delete a tag across all notes
+   */
+  const deleteTag = useCallback((tag: string) => {
+    setError(null);
+    
+    try {
+      notesService.deleteTag(tag);
+      // Refresh notes to reflect changes
+      fetchNotes();
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An error occurred while deleting the tag'));
+      return false;
+    }
+  }, [fetchNotes]);
+  
+  /**
+   * Get tag recommendations for a note
+   */
+  const getTagRecommendations = useCallback(async (noteId: string, limit = 5) => {
+    setError(null);
+    
+    try {
+      const note = notesService.getNote(noteId);
+      
+      if (!note) {
+        return [];
+      }
+      
+      return await tagRecommender.getTagRecommendations(note, limit);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An error occurred while getting tag recommendations'));
+      return [];
+    }
+  }, []);
+  
+  /**
+   * Record user feedback about a tag suggestion
+   */
+  const recordTagFeedback = useCallback((noteId: string, tag: string, accepted: boolean) => {
+    try {
+      tagRecommender.recordTagFeedback(noteId, tag, accepted);
+    } catch (err) {
+      console.error('Error recording tag feedback:', err);
+    }
+  }, []);
+  
+  /**
+   * Add AI tag to a note
+   */
+  const addAITag = useCallback(async (noteId: string, tag: string) => {
+    setError(null);
+    
+    try {
+      const updatedNote = notesService.addAITag(noteId, tag);
+      
+      if (updatedNote) {
+        setNotes(prev => 
+          prev.map(note => note.id === noteId ? updatedNote : note)
+        );
+      }
+      
+      return updatedNote;
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An error occurred while adding the AI tag'));
+      return null;
+    }
+  }, []);
+  
+  /**
+   * Remove AI tag from a note
+   */
+  const removeAITag = useCallback(async (noteId: string, tag: string) => {
+    setError(null);
+    
+    try {
+      const updatedNote = notesService.removeAITag(noteId, tag);
+      
+      if (updatedNote) {
+        setNotes(prev => 
+          prev.map(note => note.id === noteId ? updatedNote : note)
+        );
+      }
+      
+      return updatedNote;
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An error occurred while removing the AI tag'));
+      return null;
+    }
+  }, []);
+  
   // Fetch notes on initial load or when filter/sort changes
   useEffect(() => {
     fetchNotes();
@@ -192,6 +302,12 @@ export const useNotes = () => {
     updateSort,
     getCategories,
     getUserTags,
-    getAITags
+    getAITags,
+    updateTag,
+    deleteTag,
+    getTagRecommendations,
+    recordTagFeedback,
+    addAITag,
+    removeAITag
   };
 }; 

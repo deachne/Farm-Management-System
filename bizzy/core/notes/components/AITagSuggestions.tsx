@@ -1,64 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Plus, RefreshCw } from 'lucide-react';
-
-// Mock AI tag analysis service - in a real implementation, this would be a call to an AI service
-const analyzeTextForTags = async (text: string): Promise<string[]> => {
-  // Simulating API call delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Very basic tag extraction - this would be replaced by actual AI analysis
-  const keywords = [
-    { word: 'field', tag: 'field' },
-    { word: 'corn', tag: 'corn' },
-    { word: 'soybean', tag: 'soybeans' },
-    { word: 'fertilizer', tag: 'fertilizer' },
-    { word: 'irrigation', tag: 'irrigation' },
-    { word: 'weather', tag: 'weather' },
-    { word: 'rain', tag: 'weather' },
-    { word: 'storm', tag: 'weather' },
-    { word: 'dry', tag: 'drought' },
-    { word: 'wet', tag: 'moisture' },
-    { word: 'tractor', tag: 'equipment' },
-    { word: 'machinery', tag: 'equipment' },
-    { word: 'harvest', tag: 'harvest' },
-    { word: 'plant', tag: 'planting' },
-    { word: 'disease', tag: 'crop-health' },
-    { word: 'pest', tag: 'pest-management' },
-    { word: 'insect', tag: 'pest-management' },
-    { word: 'weed', tag: 'weed-control' },
-    { word: 'spray', tag: 'application' },
-    { word: 'price', tag: 'market' },
-    { word: 'cost', tag: 'financial' },
-    { word: 'budget', tag: 'financial' },
-    { word: 'soil', tag: 'soil' },
-    { word: 'nutrient', tag: 'nutrients' },
-    { word: 'nitrogen', tag: 'nutrients' },
-    { word: 'phosphorus', tag: 'nutrients' },
-    { word: 'potassium', tag: 'nutrients' },
-    { word: 'water', tag: 'water-management' },
-    { word: 'temperature', tag: 'climate' },
-    { word: 'crop', tag: 'crops' }
-  ];
-  
-  // Convert text to lowercase for case-insensitive matching
-  const lowercaseText = text.toLowerCase();
-  
-  // Extract tags based on keyword presence
-  const tags = new Set<string>();
-  
-  keywords.forEach(({ word, tag }) => {
-    if (lowercaseText.includes(word)) {
-      tags.add(tag);
-    }
-  });
-  
-  return Array.from(tags);
-};
+import { useNotes } from '../hooks/useNotes';
 
 interface AITagSuggestionsProps {
   content: string;
   existingTags: string[];
   onAddTag: (tag: string) => void;
+  noteId?: string;
   isEnabled?: boolean;
   maxSuggestions?: number;
 }
@@ -67,17 +15,20 @@ export const AITagSuggestions: React.FC<AITagSuggestionsProps> = ({
   content,
   existingTags,
   onAddTag,
+  noteId,
   isEnabled = true,
   maxSuggestions = 5
 }) => {
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [lastAnalyzedText, setLastAnalyzedText] = useState('');
+  const [lastAnalyzedContent, setLastAnalyzedContent] = useState('');
+  
+  const { getTagRecommendations, recordTagFeedback } = useNotes();
   
   // Analyze text for tag suggestions
   const analyzeTags = async () => {
-    if (!content || content.trim().length < 10 || content === lastAnalyzedText) {
+    if (!content || content.trim().length < 10 || !noteId) {
       return;
     }
     
@@ -85,16 +36,14 @@ export const AITagSuggestions: React.FC<AITagSuggestionsProps> = ({
     setError(null);
     
     try {
-      const tags = await analyzeTextForTags(content);
+      // Use the service to get tag recommendations
+      const recommendations = await getTagRecommendations(noteId, maxSuggestions);
       
       // Filter out tags that already exist
-      const newTags = tags.filter(tag => !existingTags.includes(tag));
+      const newTags = recommendations.filter(tag => !existingTags.includes(tag));
       
-      // Limit to maximum number of suggestions
-      const limitedTags = newTags.slice(0, maxSuggestions);
-      
-      setSuggestedTags(limitedTags);
-      setLastAnalyzedText(content);
+      setSuggestedTags(newTags);
+      setLastAnalyzedContent(content);
     } catch (err) {
       setError('Failed to analyze text for tags');
       console.error('Tag analysis error:', err);
@@ -103,9 +52,28 @@ export const AITagSuggestions: React.FC<AITagSuggestionsProps> = ({
     }
   };
   
+  // Handle adding a tag and record feedback
+  const handleAddTag = (tag: string) => {
+    onAddTag(tag);
+    
+    // Record that the tag was accepted
+    if (noteId) {
+      recordTagFeedback(noteId, tag, true);
+    }
+    
+    // Remove the tag from suggestions
+    setSuggestedTags(prev => prev.filter(t => t !== tag));
+  };
+  
   // Auto-analyze text when content changes, with debounce
   useEffect(() => {
-    if (!isEnabled || !content || content.trim().length < 10) {
+    if (!isEnabled || !content || content.trim().length < 10 || !noteId) {
+      return;
+    }
+    
+    // Skip if content hasn't changed enough
+    if (lastAnalyzedContent && 
+        Math.abs(content.length - lastAnalyzedContent.length) < 20) {
       return;
     }
     
@@ -114,10 +82,10 @@ export const AITagSuggestions: React.FC<AITagSuggestionsProps> = ({
     }, 1000); // 1 second debounce
     
     return () => clearTimeout(debounceTimeout);
-  }, [content, existingTags, isEnabled]);
+  }, [content, existingTags, isEnabled, noteId]);
   
-  // If disabled or no content, don't render anything
-  if (!isEnabled || !content || content.trim().length < 10) {
+  // If disabled, no content, or no noteId, don't render anything
+  if (!isEnabled || !content || content.trim().length < 10 || !noteId) {
     return null;
   }
   
@@ -153,7 +121,7 @@ export const AITagSuggestions: React.FC<AITagSuggestionsProps> = ({
           suggestedTags.map(tag => (
             <button
               key={tag}
-              onClick={() => onAddTag(tag)}
+              onClick={() => handleAddTag(tag)}
               className="flex items-center gap-1 px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200"
             >
               <Plus size={12} />

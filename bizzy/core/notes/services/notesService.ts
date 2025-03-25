@@ -248,16 +248,14 @@ export class NotesService {
    */
   createNote(noteData: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>): Note {
     const newNote: Note = {
-      ...noteData,
-      id: Date.now().toString(),
+      id: `note-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
       createdAt: new Date(),
       updatedAt: new Date(),
-      userTags: noteData.userTags || [],
-      aiTags: noteData.aiTags || [],
-      category: noteData.category || 'general'
+      vectorId: noteData.vectorId || undefined,
+      ...noteData
     };
     
-    this.notes.push(newNote);
+    this.notes.unshift(newNote);
     this.saveToLocalStorage();
     
     return newNote;
@@ -267,21 +265,19 @@ export class NotesService {
    * Update an existing note
    */
   updateNote(id: string, noteData: Partial<Note>): Note | null {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index === -1) return null;
+    const noteIndex = this.notes.findIndex(note => note.id === id);
     
-    const updatedNote = {
-      ...this.notes[index],
+    if (noteIndex === -1) {
+      return null;
+    }
+    
+    const updatedNote: Note = {
+      ...this.notes[noteIndex],
       ...noteData,
       updatedAt: new Date()
     };
     
-    // Keep the dateStamp from existing note if not explicitly updated
-    if (!noteData.dateStamp) {
-      updatedNote.dateStamp = this.notes[index].dateStamp;
-    }
-    
-    this.notes[index] = updatedNote;
+    this.notes[noteIndex] = updatedNote;
     this.saveToLocalStorage();
     
     return updatedNote;
@@ -367,6 +363,112 @@ export class NotesService {
     });
     
     return Array.from(tags);
+  }
+
+  /**
+   * Update tag across all notes (rename)
+   */
+  updateTag(oldTag: string, newTag: string): void {
+    this.notes.forEach(note => {
+      // Update userTags
+      const userTagIndex = note.userTags.findIndex(tag => tag === oldTag);
+      if (userTagIndex >= 0) {
+        note.userTags = [
+          ...note.userTags.slice(0, userTagIndex),
+          newTag,
+          ...note.userTags.slice(userTagIndex + 1)
+        ];
+      }
+      
+      // Update aiTags
+      const aiTagIndex = note.aiTags.findIndex(tag => tag === oldTag);
+      if (aiTagIndex >= 0) {
+        note.aiTags = [
+          ...note.aiTags.slice(0, aiTagIndex),
+          newTag,
+          ...note.aiTags.slice(aiTagIndex + 1)
+        ];
+      }
+    });
+    
+    this.saveToLocalStorage();
+  }
+  
+  /**
+   * Delete tag across all notes
+   */
+  deleteTag(tagToDelete: string): void {
+    this.notes.forEach(note => {
+      note.userTags = note.userTags.filter(tag => tag !== tagToDelete);
+      note.aiTags = note.aiTags.filter(tag => tag !== tagToDelete);
+    });
+    
+    this.saveToLocalStorage();
+  }
+
+  /**
+   * Set AI tags for a note
+   */
+  setAITags(noteId: string, tags: string[]): Note | null {
+    const note = this.getNote(noteId);
+    
+    if (!note) {
+      return null;
+    }
+    
+    // Update the note with the new AI tags
+    const updatedNote = {
+      ...note,
+      aiTags: tags,
+      updatedAt: new Date()
+    };
+    
+    return this.updateNote(noteId, updatedNote);
+  }
+  
+  /**
+   * Add an AI tag to a note
+   */
+  addAITag(noteId: string, tag: string): Note | null {
+    const note = this.getNote(noteId);
+    
+    if (!note) {
+      return null;
+    }
+    
+    if (note.aiTags.includes(tag)) {
+      return note; // Tag already exists
+    }
+    
+    const updatedTags = [...note.aiTags, tag];
+    return this.setAITags(noteId, updatedTags);
+  }
+  
+  /**
+   * Remove an AI tag from a note
+   */
+  removeAITag(noteId: string, tag: string): Note | null {
+    const note = this.getNote(noteId);
+    
+    if (!note) {
+      return null;
+    }
+    
+    const updatedTags = note.aiTags.filter(t => t !== tag);
+    return this.setAITags(noteId, updatedTags);
+  }
+  
+  /**
+   * Set the vector ID for a note
+   */
+  setVectorId(noteId: string, vectorId: string): Note | null {
+    const note = this.getNote(noteId);
+    
+    if (!note) {
+      return null;
+    }
+    
+    return this.updateNote(noteId, { vectorId });
   }
 }
 

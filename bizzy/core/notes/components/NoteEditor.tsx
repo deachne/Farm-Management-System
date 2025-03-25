@@ -202,6 +202,7 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({
             content={note.content}
             existingTags={[...note.userTags, ...note.aiTags]}
             onAddTag={onAddTag}
+            noteId={note.id}
             isEnabled={true}
           />
         </div>
